@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="233b99bd6469446cb760dbde53ed2d6e" Name="Diagram1">
+        <EntityTypeShape EntityType="AutoCar360Model.CARROCERIAS" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.COLORES" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.COMBUSTIBLE" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.ETIQUETAS" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.HISTORIALMANTENIMIENTO" Width="1.5" PointX="12" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.HISTORIALREVISIONES" Width="1.5" PointX="15" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.MANTENIMIENTOVEHICULO" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.MARCAS" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.MODELOS" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.PROXIMASREVISIONES" Width="1.5" PointX="15" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.PROXIMOMANTENIMIENTO" Width="1.5" PointX="12" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.REVISIONESVEHICULO" Width="1.5" PointX="12.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.TIPOCAMBIO" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.TIPOMANTENIMIENTO" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.TIPOREVISIONES" Width="1.5" PointX="10.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.TIPOVEHICULO" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.USUARIOS" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoCar360Model.VEHICULOS" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="AutoCar360Model.FK_CARROCERIAS_TIPOVEHICULO" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_MODELOS_CARROCERIAS" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_VEHICULOS_COLORES" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_MODELOS_COMBUSTIBLE" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_MODELOS_ETIQUETAS" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_HISTORIALMANTENIMIENTO_MANTENIMIENTOVEHICULO" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_HISTORIALREVISIONES_REVISIONESVEHICULO" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_MANTENIMIENTOVEHICULO_TIPOMANTENIMIENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_MANTENIMIENTOVEHICULO_VEHICULOS" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_PROXIMOMANTENIMIENTO_MANTENIMIENTOVEHICULO" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_MODELOS_MARCAS" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_MODELOS_TIPOCAMBIO" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_VEHICULOS_MODELOS" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_PROXIMASREVISIONES_REVISIONESVEHICULO" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_REVISIONESVEHICULO_TIPOREVISIONES" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_REVISIONESVEHICULO_VEHICULOS" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoCar360Model.FK_VEHICULOS_USUARIOS" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,83 @@
+﻿@model AutoCar360.Controllers.VEHICULOS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VEHICULOS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehiculo_Matricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehiculo_Matricula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehiculo_Fecha_Matriculacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehiculo_Fecha_Matriculacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehiculo_Bastidor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehiculo_Bastidor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehiculo_KmActuales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehiculo_KmActuales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COLORES.Color_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COLORES.Color_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODELOS.Modelo_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODELOS.Modelo_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USUARIOS.Usuario_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIOS.Usuario_Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Vehiculo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

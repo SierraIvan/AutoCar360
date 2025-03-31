@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AutoCar360ModelStoreContainer" CdmEntityContainer="AutoCar360Entities1">
+    <EntitySetMapping Name="CARROCERIAS">
+      <EntityTypeMapping TypeName="AutoCar360Model.CARROCERIAS">
+        <MappingFragment StoreEntitySet="CARROCERIAS">
+          <ScalarProperty Name="Id_Carroceria" ColumnName="Id_Carroceria" />
+          <ScalarProperty Name="Id_TipoVehiculo" ColumnName="Id_TipoVehiculo" />
+          <ScalarProperty Name="Carroceria_Nombre" ColumnName="Carroceria_Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COLORES">
+      <EntityTypeMapping TypeName="AutoCar360Model.COLORES">
+        <MappingFragment StoreEntitySet="COLORES">
+          <ScalarProperty Name="Id_Color" ColumnName="Id_Color" />
+          <ScalarProperty Name="Color_Nombre" ColumnName="Color_Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMBUSTIBLE">
+      <EntityTypeMapping TypeName="AutoCar360Model.COMBUSTIBLE">
+        <MappingFragment StoreEntitySet="COMBUSTIBLE">
+          <ScalarProperty Name="Id_Combustible" ColumnName="Id_Combustible" />
+          <ScalarProperty Name="Combustible_Nombre" ColumnName="Combustible_Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ETIQUETAS">
+      <EntityTypeMapping TypeName="AutoCar360Model.ETIQUETAS">
+        <MappingFragment StoreEntitySet="ETIQUETAS">
+          <ScalarProperty Name="Id_Etiqueta" ColumnName="Id_Etiqueta" />
+          <ScalarProperty Name="Etiqueta_Nombre" ColumnName="Etiqueta_Nombre" />
+          <ScalarProperty Name="Etiqueta_Descripcion" ColumnName="Etiqueta_Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HISTORIALMANTENIMIENTO">
+      <EntityTypeMapping TypeName="AutoCar360Model.HISTORIALMANTENIMIENTO">
+        <MappingFragment StoreEntitySet="HISTORIALMANTENIMIENTO">
+          <ScalarProperty Name="Id_HistorialMantenimiento" ColumnName="Id_HistorialMantenimiento" />
+          <ScalarProperty Name="Id_MantenimientoVehiculo" ColumnName="Id_MantenimientoVehiculo" />
+          <ScalarProperty Name="HistorialMantenimiento_Fecha" ColumnName="HistorialMantenimiento_Fecha" />
+          <ScalarProperty Name="HistorialMantenimiento_Taller" ColumnName="HistorialMantenimiento_Taller" />
+          <ScalarProperty Name="HistorialMantenimiento_Precio" ColumnName="HistorialMantenimiento_Precio" />
+          <ScalarProperty Name="HistorialMantenimiento_Km" ColumnName="HistorialMantenimiento_Km" />
+          <ScalarProperty Name="HistorialMantenimiento_Comentarios" ColumnName="HistorialMantenimiento_Comentarios" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HISTORIALREVISIONES">
+      <EntityTypeMapping TypeName="AutoCar360Model.HISTORIALREVISIONES">
+        <MappingFragment StoreEntitySet="HISTORIALREVISIONES">
+          <ScalarProperty Name="Id_HistorialRevisiones" ColumnName="Id_HistorialRevisiones" />
+          <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
+          <ScalarProperty Name="HistorialRevisiones_Fecha" ColumnName="HistorialRevisiones_Fecha" />
+          <ScalarProperty Name="HistorialRevisiones_Taller" ColumnName="HistorialRevisiones_Taller" />
+          <ScalarProperty Name="HistorialRevisiones_Precio" ColumnName="HistorialRevisiones_Precio" />
+          <ScalarProperty Name="HistorialRevisiones_km" ColumnName="HistorialRevisiones_km" />
+          <ScalarProperty Name="HistorialRevisiones_Comentarios" ColumnName="HistorialRevisiones_Comentarios" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MANTENIMIENTOVEHICULO">
+      <EntityTypeMapping TypeName="AutoCar360Model.MANTENIMIENTOVEHICULO">
+        <MappingFragment StoreEntitySet="MANTENIMIENTOVEHICULO">
+          <ScalarProperty Name="Id_MantenimientoVehiculo" ColumnName="Id_MantenimientoVehiculo" />
+          <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+          <ScalarProperty Name="Id_TipoMantenimiento" ColumnName="Id_TipoMantenimiento" />
+          <ScalarProperty Name="MantenimientoVehiculo_IntervaloKm" ColumnName="MantenimientoVehiculo_IntervaloKm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MARCAS">
+      <EntityTypeMapping TypeName="AutoCar360Model.MARCAS">
+        <MappingFragment StoreEntitySet="MARCAS">
+          <ScalarProperty Name="Id_Marca" ColumnName="Id_Marca" />
+          <ScalarProperty Name="Marca_Nombre" ColumnName="Marca_Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MODELOS">
+      <EntityTypeMapping TypeName="AutoCar360Model.MODELOS">
+        <MappingFragment StoreEntitySet="MODELOS">
+          <ScalarProperty Name="Id_Modelo" ColumnName="Id_Modelo" />
+          <ScalarProperty Name="Id_Marca" ColumnName="Id_Marca" />
+          <ScalarProperty Name="Id_TipoCambio" ColumnName="Id_TipoCambio" />
+          <ScalarProperty Name="Id_Etiqueta" ColumnName="Id_Etiqueta" />
+          <ScalarProperty Name="Id_Combustible" ColumnName="Id_Combustible" />
+          <ScalarProperty Name="Id_Carroceria" ColumnName="Id_Carroceria" />
+          <ScalarProperty Name="Modelo_Nombre" ColumnName="Modelo_Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROXIMASREVISIONES">
+      <EntityTypeMapping TypeName="AutoCar360Model.PROXIMASREVISIONES">
+        <MappingFragment StoreEntitySet="PROXIMASREVISIONES">
+          <ScalarProperty Name="Id_ProximaRevision" ColumnName="Id_ProximaRevision" />
+          <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
+          <ScalarProperty Name="ProximaRevision_intervalo" ColumnName="ProximaRevision_intervalo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROXIMOMANTENIMIENTO">
+      <EntityTypeMapping TypeName="AutoCar360Model.PROXIMOMANTENIMIENTO">
+        <MappingFragment StoreEntitySet="PROXIMOMANTENIMIENTO">
+          <ScalarProperty Name="Id_ProximoMantenimiento" ColumnName="Id_ProximoMantenimiento" />
+          <ScalarProperty Name="Id_MantenimientoVehiculo" ColumnName="Id_MantenimientoVehiculo" />
+          <ScalarProperty Name="ProximoMantenimiento_Km" ColumnName="ProximoMantenimiento_Km" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REVISIONESVEHICULO">
+      <EntityTypeMapping TypeName="AutoCar360Model.REVISIONESVEHICULO">
+        <MappingFragment StoreEntitySet="REVISIONESVEHICULO">
+          <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
+          <ScalarProperty Name="Id_TipoRevision" ColumnName="Id_TipoRevision" />
+          <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+          <ScalarProperty Name="RevisionesVehiculo_Intervalo" ColumnName="RevisionesVehiculo_Intervalo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="AutoCar360Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOCAMBIO">
+      <EntityTypeMapping TypeName="AutoCar360Model.TIPOCAMBIO">
+        <MappingFragment StoreEntitySet="TIPOCAMBIO">
+          <ScalarProperty Name="Id_TipoCambio" ColumnName="Id_TipoCambio" />
+          <ScalarProperty Name="TipoCambio_Nombre" ColumnName="TipoCambio_Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOMANTENIMIENTO">
+      <EntityTypeMapping TypeName="AutoCar360Model.TIPOMANTENIMIENTO">
+        <MappingFragment StoreEntitySet="TIPOMANTENIMIENTO">
+          <ScalarProperty Name="Id_TipoMantenimiento" ColumnName="Id_TipoMantenimiento" />
+          <ScalarProperty Name="Mantenimiento_Nombre" ColumnName="Mantenimiento_Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOREVISIONES">
+      <EntityTypeMapping TypeName="AutoCar360Model.TIPOREVISIONES">
+        <MappingFragment StoreEntitySet="TIPOREVISIONES">
+          <ScalarProperty Name="Id_TipoRevision" ColumnName="Id_TipoRevision" />
+          <ScalarProperty Name="Revision_Nombre" ColumnName="Revision_Nombre" />
+          <ScalarProperty Name="Revision_Intervalo" ColumnName="Revision_Intervalo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOVEHICULO">
+      <EntityTypeMapping TypeName="AutoCar360Model.TIPOVEHICULO">
+        <MappingFragment StoreEntitySet="TIPOVEHICULO">
+          <ScalarProperty Name="Id_TipoVehiculo" ColumnName="Id_TipoVehiculo" />
+          <ScalarProperty Name="TipoVehiculo_Nombre" ColumnName="TipoVehiculo_Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOS">
+      <EntityTypeMapping TypeName="AutoCar360Model.USUARIOS">
+        <MappingFragment StoreEntitySet="USUARIOS">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Usuario_Nombre" ColumnName="Usuario_Nombre" />
+          <ScalarProperty Name="Usuario_Password" ColumnName="Usuario_Password" />
+          <ScalarProperty Name="Usuario_FechaRegistro" ColumnName="Usuario_FechaRegistro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VEHICULOS">
+      <EntityTypeMapping TypeName="AutoCar360Model.VEHICULOS">
+        <MappingFragment StoreEntitySet="VEHICULOS">
+          <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Id_Modelo" ColumnName="Id_Modelo" />
+          <ScalarProperty Name="Id_Color" ColumnName="Id_Color" />
+          <ScalarProperty Name="Vehiculo_Matricula" ColumnName="Vehiculo_Matricula" />
+          <ScalarProperty Name="Vehiculo_Fecha_Matriculacion" ColumnName="Vehiculo_Fecha_Matriculacion" />
+          <ScalarProperty Name="Vehiculo_Bastidor" ColumnName="Vehiculo_Bastidor" />
+          <ScalarProperty Name="Vehiculo_KmActuales" ColumnName="Vehiculo_KmActuales" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="AutoCar360Model.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="AutoCar360Model.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="AutoCar360Model.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="AutoCar360Model.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AutoCar360Model.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="AutoCar360Model.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AutoCar360Model.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="AutoCar360Model.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="AutoCar360Model.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>
