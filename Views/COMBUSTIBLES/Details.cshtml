@@ -15,13 +15,24 @@
             @Html.DisplayNameFor(model => model.Combustible_Nombre)
         </dt>
 
-        <dd>
+        <dd style="font-size: 18px; color: #333; font-weight: bold; padding: 8px 12px; background-color: #f8f9fa; border-left: 4px solid #28a745; border-radius: 4px; margin-bottom: 10px;">
             @Html.DisplayFor(model => model.Combustible_Nombre)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Combustible }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("✏️ Edit", "Edit", new { id = Model.Id_Combustible }, new { @class = "btn-edit" }) |
+    @Html.ActionLink("← Back to List", "Index", null, new { @class = "btn-back" })
 </p>
+
+<style>
+    .btn-edit {
+        color: #ffffff;
+        background-color: #ffc107; /* Amarillo similar a btn-warning de Bootstrap */
+        padding: 5px 10px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>

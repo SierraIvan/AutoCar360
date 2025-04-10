@@ -40,7 +40,8 @@ namespace AutoCar360.Controllers
         {
             ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre");
             ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre");
-            ViewBag.Id_Modelo = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre");
+            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre");
+
             return View();
         }
 
@@ -60,7 +61,7 @@ namespace AutoCar360.Controllers
 
             ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vEHICULOS.Id_Color);
             ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vEHICULOS.Id_Modelo);
-            ViewBag.Id_Modelo = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Modelo);
+            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Usuario);
             return View(vEHICULOS);
         }
 
@@ -78,7 +79,7 @@ namespace AutoCar360.Controllers
             }
             ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vEHICULOS.Id_Color);
             ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vEHICULOS.Id_Modelo);
-            ViewBag.Id_Modelo = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Modelo);
+            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Usuario);
             return View(vEHICULOS);
         }
 
@@ -97,7 +98,7 @@ namespace AutoCar360.Controllers
             }
             ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vEHICULOS.Id_Color);
             ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vEHICULOS.Id_Modelo);
-            ViewBag.Id_Modelo = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Modelo);
+            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Usuario);
             return View(vEHICULOS);
         }
 

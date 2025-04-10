@@ -1,0 +1,73 @@
+﻿@model AutoCar360.Controllers.MODELOS
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MODELOS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CARROCERIAS.Carroceria_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARROCERIAS.Carroceria_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMBUSTIBLE.Combustible_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMBUSTIBLE.Combustible_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ETIQUETAS.Etiqueta_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ETIQUETAS.Etiqueta_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MARCAS.Marca_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MARCAS.Marca_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPOCAMBIO.TipoCambio_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPOCAMBIO.TipoCambio_Nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

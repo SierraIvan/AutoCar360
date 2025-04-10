@@ -1,0 +1,67 @@
+﻿@model AutoCar360.Controllers.MODELOS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MODELOS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CARROCERIAS.Carroceria_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARROCERIAS.Carroceria_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMBUSTIBLE.Combustible_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMBUSTIBLE.Combustible_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ETIQUETAS.Etiqueta_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ETIQUETAS.Etiqueta_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MARCAS.Marca_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MARCAS.Marca_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPOCAMBIO.TipoCambio_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPOCAMBIO.TipoCambio_Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Modelo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -22,7 +23,7 @@
                     <li>@Html.ActionLink("TIPO COMBUSTIBLE", "Index", "COMBUSTIBLES", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("TIPO DE CAMBIO", "Index", "TIPOCAMBIO", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("VEHICULOS", "Index", "VEHICULOS", new { area = "" }, new { @class = "nav-link" })</li>
-
+                    <li>@Html.ActionLink("MODELOS", "Index", "MODELOS", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>

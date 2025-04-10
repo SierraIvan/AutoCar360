@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AutoCar360.Controllers.MODELOS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CARROCERIAS.Carroceria_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COMBUSTIBLE.Combustible_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ETIQUETAS.Etiqueta_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MARCAS.Marca_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TIPOCAMBIO.TipoCambio_Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CARROCERIAS.Carroceria_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COMBUSTIBLE.Combustible_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ETIQUETAS.Etiqueta_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MARCAS.Marca_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TIPOCAMBIO.TipoCambio_Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Modelo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_Modelo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Modelo })
+        </td>
+    </tr>
+}
+
+</table>
