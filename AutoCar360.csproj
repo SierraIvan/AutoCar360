@@ -200,6 +200,7 @@
     <Compile Include="Controllers\USUARIOS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\USUARIOSController.cs" />
     <Compile Include="Controllers\VEHICULOS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -297,6 +298,11 @@
     <Content Include="Views\MODELOS\Details.cshtml" />
     <Content Include="Views\MODELOS\Edit.cshtml" />
     <Content Include="Views\MODELOS\Index.cshtml" />
+    <Content Include="Views\USUARIOS\Create.cshtml" />
+    <Content Include="Views\USUARIOS\Delete.cshtml" />
+    <Content Include="Views\USUARIOS\Details.cshtml" />
+    <Content Include="Views\USUARIOS\Edit.cshtml" />
+    <Content Include="Views\USUARIOS\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
