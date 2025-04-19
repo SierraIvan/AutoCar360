@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using AutoCar360.Models;
+using AutoCar360.Controllers;
 
 namespace AutoCar360.Controllers
 {
@@ -13,114 +11,50 @@ namespace AutoCar360.Controllers
     {
         private AutoCar360Entities2 db = new AutoCar360Entities2();
 
-        // GET: USUARIOS
+        // GET: USUARIOS (Login)
         public ActionResult Index()
         {
-            return View(db.USUARIOS.ToList());
+            return View();
         }
 
-        // GET: USUARIOS/Details/5
-        public ActionResult Details(int? id)
+        // POST: USUARIOS (Login)
+        [HttpPost]
+        public ActionResult Index(LoginViewModel model)
         {
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var user = db.USUARIOS.FirstOrDefault(u =>
+                    u.Usuario_Nombre == model.Usuario_Nombre &&
+                    u.Usuario_Password == model.Usuario_Password);
+
+                if (user != null)
+                {
+                    Session["UsuarioId"] = user.Id_Usuario;
+                    Session["UsuarioNombre"] = user.Usuario_Nombre;
+
+                    // Redirige al controlador VEHICULOS
+                    return RedirectToAction("Index", "VEHICULOS");
+                }
+
+                ViewBag.Error = "Usuario o contraseña incorrectos.";
             }
-            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
-            if (uSUARIOS == null)
-            {
-                return HttpNotFound();
-            }
-            return View(uSUARIOS);
+
+            return View(model);
         }
 
-        // GET: USUARIOS/Create
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");
+        }
+
+        // Puedes dejar tus acciones Create, Edit, Delete, etc. debajo si las necesitas
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: USUARIOS/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Usuario,Usuario_Nombre,Usuario_Password,Usuario_FechaRegistro")] USUARIOS uSUARIOS)
-        {
-            if (ModelState.IsValid)
-            {
-                db.USUARIOS.Add(uSUARIOS);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(uSUARIOS);
-        }
-
-        // GET: USUARIOS/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
-            if (uSUARIOS == null)
-            {
-                return HttpNotFound();
-            }
-            return View(uSUARIOS);
-        }
-
-        // POST: USUARIOS/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_Usuario,Usuario_Nombre,Usuario_Password,Usuario_FechaRegistro")] USUARIOS uSUARIOS)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(uSUARIOS).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(uSUARIOS);
-        }
-
-        // GET: USUARIOS/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
-            if (uSUARIOS == null)
-            {
-                return HttpNotFound();
-            }
-            return View(uSUARIOS);
-        }
-
-        // POST: USUARIOS/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
-            db.USUARIOS.Remove(uSUARIOS);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

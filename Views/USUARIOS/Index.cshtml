@@ -1,46 +1,77 @@
-﻿@model IEnumerable<AutoCar360.Controllers.USUARIOS>
+﻿@model AutoCar360.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Iniciar sesión";
+    Layout = null;
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #1e2b2d;
+            font-family: 'Segoe UI', sans-serif;
+            color: #00e5ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario_Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario_Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario_FechaRegistro)
-        </th>
-        <th></th>
-    </tr>
+        .login-box {
+            text-align: center;
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario_Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario_Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario_FechaRegistro)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Usuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_Usuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Usuario })
-        </td>
-    </tr>
-}
+        input, button {
+            margin: 8px;
+            padding: 10px;
+            width: 250px;
+            border: none;
+            border-radius: 5px;
+        }
 
-</table>
+        input {
+            background-color: #2d3d3f;
+            color: white;
+        }
+
+        button {
+            background-color: #00e5ff;
+            color: #1e2b2d;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+
+        <h1>AUTOCAR360</h1>
+
+        @using (Html.BeginForm("Index", "USUARIOS", FormMethod.Post))
+        {
+            <div>
+                <input type="text" name="Usuario_Nombre" placeholder="Usuario" required />
+            </div>
+            <div>
+                <input type="password" name="Usuario_Password" placeholder="Contraseña" required />
+            </div>
+            <div>
+                <button type="submit">Iniciar sesión</button>
+                @Html.ActionLink("Registrarse", "Create", "USUARIOS", null, new { @style = "margin-left:10px; color: #00e5ff;" })
+
+                @*{ @style = "margin-left:10px; color: #00e5ff;" }*@
+            </div>
+        }
+
+        @if (ViewBag.Error != null)
+        {
+            <div style="margin-top:10px;">
+                <span style="color:red;">@ViewBag.Error</span>
+            </div>
+        }
+    </div>
+</body>
+</html>

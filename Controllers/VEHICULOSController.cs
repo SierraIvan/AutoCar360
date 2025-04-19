@@ -16,8 +16,20 @@ namespace AutoCar360.Controllers
         // GET: VEHICULOS
         public ActionResult Index()
         {
-            var vEHICULOS = db.VEHICULOS.Include(v => v.COLORES).Include(v => v.MODELOS).Include(v => v.USUARIOS);
-            return View(vEHICULOS.ToList());
+            if (Session["UsuarioId"] == null)
+            {
+                return RedirectToAction("Index", "USUARIOS");
+            }
+
+            int usuarioId = (int)Session["UsuarioId"];
+
+            var vehiculosUsuario = db.VEHICULOS
+                .Include(v => v.COLORES)
+                .Include(v => v.MODELOS)
+                .Include(v => v.USUARIOS)
+                .Where(v => v.Id_Usuario == usuarioId);
+
+            return View(vehiculosUsuario.ToList());
         }
 
         // GET: VEHICULOS/Details/5
@@ -40,20 +52,23 @@ namespace AutoCar360.Controllers
         {
             ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre");
             ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre");
-            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre");
-
+            // Se elimina el dropdown de usuario porque se asignará automáticamente
             return View();
         }
 
         // POST: VEHICULOS/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Vehiculo,Id_Usuario,Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales")] VEHICULOS vEHICULOS)
+        public ActionResult Create([Bind(Include = "Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales")] VEHICULOS vEHICULOS)
         {
+            if (Session["UsuarioId"] == null)
+            {
+                return RedirectToAction("Index", "USUARIOS");
+            }
+
             if (ModelState.IsValid)
             {
+                vEHICULOS.Id_Usuario = (int)Session["UsuarioId"];
                 db.VEHICULOS.Add(vEHICULOS);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -61,7 +76,6 @@ namespace AutoCar360.Controllers
 
             ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vEHICULOS.Id_Color);
             ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vEHICULOS.Id_Modelo);
-            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Usuario);
             return View(vEHICULOS);
         }
 
@@ -84,8 +98,6 @@ namespace AutoCar360.Controllers
         }
 
         // POST: VEHICULOS/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id_Vehiculo,Id_Usuario,Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales")] VEHICULOS vEHICULOS)
