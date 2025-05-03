@@ -144,6 +144,7 @@
     <Compile Include="Controllers\MANTENIMIENTOVEHICULO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\MANTENIMIENTOVEHICULOController.cs" />
     <Compile Include="Controllers\MARCAS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -172,6 +173,7 @@
     <Compile Include="Controllers\PROXIMOMANTENIMIENTO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PROXIMOMANTENIMIENTOController.cs" />
     <Compile Include="Controllers\REVISIONESVEHICULO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -305,6 +307,16 @@
     <Content Include="Views\USUARIOS\Details.cshtml" />
     <Content Include="Views\USUARIOS\Edit.cshtml" />
     <Content Include="Views\USUARIOS\Index.cshtml" />
+    <Content Include="Views\MANTENIMIENTOVEHICULO\Create.cshtml" />
+    <Content Include="Views\MANTENIMIENTOVEHICULO\Delete.cshtml" />
+    <Content Include="Views\MANTENIMIENTOVEHICULO\Details.cshtml" />
+    <Content Include="Views\MANTENIMIENTOVEHICULO\Edit.cshtml" />
+    <Content Include="Views\MANTENIMIENTOVEHICULO\Index.cshtml" />
+    <Content Include="Views\PROXIMOMANTENIMIENTO\Create.cshtml" />
+    <Content Include="Views\PROXIMOMANTENIMIENTO\Delete.cshtml" />
+    <Content Include="Views\PROXIMOMANTENIMIENTO\Details.cshtml" />
+    <Content Include="Views\PROXIMOMANTENIMIENTO\Edit.cshtml" />
+    <Content Include="Views\PROXIMOMANTENIMIENTO\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
