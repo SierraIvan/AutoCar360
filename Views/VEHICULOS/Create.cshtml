@@ -1,83 +1,80 @@
 ﻿@model AutoCar360.Controllers.VEHICULOS
 
 @{
-    ViewBag.Title = "Crear Nuevo Vehículo";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid bg-dark text-light p-4">
-    <h2 class="mb-4">@ViewBag.Title</h2>
-    <div class="card bg-secondary text-light">
-        <div class="card-body">
-            @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "Por favor, corrige los siguientes errores:", new { @class = "text-danger" })
+<h2>Create</h2>
 
-                @Html.HiddenFor(model => model.Id_Usuario)
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Id_Modelo, "Modelo", new { @class = "form-label" })
-                    @Html.DropDownList("Id_Modelo", null, "Seleccionar Modelo", new { @class = "form-control bg-dark text-light border-secondary" })
-                    @Html.ValidationMessageFor(model => model.Id_Modelo, null, new { @class = "text-danger" })
-                </div>
+    <div class="form-horizontal">
+        <h4>VEHICULOS</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Id_Color, "Color", new { @class = "form-label" })
-                    @Html.DropDownList("Id_Color", null, "Seleccionar Color", new { @class = "form-control bg-dark text-light border-secondary" })
-                    @Html.ValidationMessageFor(model => model.Id_Color, null, new { @class = "text-danger" })
-                </div>
+        @* Campo oculto para el Id_Usuario (opcional si ya lo asignas en el controlador) *@
+        @Html.HiddenFor(model => model.Id_Usuario)
 
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Vehiculo_Matricula, "Matrícula", new { @class = "form-label" })
-                    @Html.EditorFor(model => model.Vehiculo_Matricula, new { htmlAttributes = new { @class = "form-control bg-dark text-light border-secondary" } })
-                    @Html.ValidationMessageFor(model => model.Vehiculo_Matricula, null, new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_Modelo, "Modelo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id_Modelo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_Modelo, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Vehiculo_Fecha_Matriculacion, "Fecha de Matriculación", new { @class = "form-label" })
-                    @Html.EditorFor(model => model.Vehiculo_Fecha_Matriculacion, new { htmlAttributes = new { @class = "form-control datepicker bg-dark text-light border-secondary" } })
-                    @Html.ValidationMessageFor(model => model.Vehiculo_Fecha_Matriculacion, null, new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_Color, "Color", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id_Color", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_Color, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Vehiculo_Bastidor, "Número de Bastidor (VIN)", new { @class = "form-label" })
-                    @Html.EditorFor(model => model.Vehiculo_Bastidor, new { htmlAttributes = new { @class = "form-control bg-dark text-light border-secondary" } })
-                    @Html.ValidationMessageFor(model => model.Vehiculo_Bastidor, null, new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehiculo_Matricula, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vehiculo_Matricula, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vehiculo_Matricula, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Vehiculo_KmActuales, "Kilometraje Actual", new { @class = "form-label" })
-                    @Html.EditorFor(model => model.Vehiculo_KmActuales, new { htmlAttributes = new { @class = "form-control bg-dark text-light border-secondary" } })
-                    @Html.ValidationMessageFor(model => model.Vehiculo_KmActuales, null, new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehiculo_Fecha_Matriculacion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vehiculo_Fecha_Matriculacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vehiculo_Fecha_Matriculacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                <div class="d-flex justify-content-end">
-                    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-outline-light me-2" })
-                    <button type="submit" class="btn btn-primary">Guardar Vehículo</button>
-                </div>
-            }
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehiculo_Bastidor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vehiculo_Bastidor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vehiculo_Bastidor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehiculo_KmActuales, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vehiculo_KmActuales, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vehiculo_KmActuales, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        $(function () {
-            $('.datepicker').datepicker({
-                dateFormat: 'dd/mm/yy',
-                changeMonth: true,
-                changeYear: true
-            });
-        });
-    </script>
 }
 
-<style>
-    body {
-        background-color: #0a3a4a;
-        color: #000;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-</style>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
