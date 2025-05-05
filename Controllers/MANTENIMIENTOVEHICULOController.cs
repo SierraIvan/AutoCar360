@@ -17,16 +17,13 @@ namespace AutoCar360.Controllers
         // GET: MANTENIMIENTOVEHICULO
         public ActionResult Index()
         {
-            // Obtener el ID del usuario de la sesión
             int? usuarioId = (int?)Session["UsuarioId"];
 
             if (usuarioId == null)
             {
-                // Si no hay usuario logueado, redirigir al login
                 return RedirectToAction("Index", "USUARIOS");
             }
 
-            // Filtrar los mantenimientos por los vehículos del usuario
             var mANTENIMIENTOVEHICULO = db.MANTENIMIENTOVEHICULO
                 .Include(m => m.TIPOMANTENIMIENTO)
                 .Include(m => m.VEHICULOS)
@@ -43,7 +40,6 @@ namespace AutoCar360.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            // Verificar que el mantenimiento pertenece a un vehículo del usuario
             int? usuarioId = (int?)Session["UsuarioId"];
             MANTENIMIENTOVEHICULO mANTENIMIENTOVEHICULO = db.MANTENIMIENTOVEHICULO
                 .FirstOrDefault(m => m.Id_MantenimientoVehiculo == id && m.VEHICULOS.Id_Usuario == usuarioId);
@@ -67,7 +63,7 @@ namespace AutoCar360.Controllers
             ViewBag.Id_TipoMantenimiento = new SelectList(db.TIPOMANTENIMIENTO, "Id_TipoMantenimiento", "Mantenimiento_Nombre");
             ViewBag.Id_Vehiculo = new SelectList(db.VEHICULOS.Where(v => v.Id_Usuario == usuarioId), "Id_Vehiculo", "Vehiculo_Matricula");
 
-            return View(); // ✅ Esto muestra el formulario
+            return View();
         }
 
         // POST: MANTENIMIENTOVEHICULO/Create

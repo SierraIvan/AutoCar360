@@ -1,40 +1,46 @@
 ﻿@model IEnumerable<AutoCar360.Controllers.PROXIMOMANTENIMIENTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Próximos Mantenimientos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Próximos Mantenimientos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create","MANTENIMIENTOVEHICULO")
+    @Html.ActionLink("Crear Nuevo", "Create", "MANTENIMIENTOVEHICULO")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProximoMantenimiento_Km)
+            Matrícula
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MANTENIMIENTOVEHICULO.Id_MantenimientoVehiculo)
+            Tipo de Mantenimiento
+        </th>
+        <th>
+            Próximo Mantenimiento (Km)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProximoMantenimiento_Km)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MANTENIMIENTOVEHICULO.Id_MantenimientoVehiculo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_ProximoMantenimiento }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_ProximoMantenimiento }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_ProximoMantenimiento })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MANTENIMIENTOVEHICULO.VEHICULOS.Vehiculo_Matricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO.Mantenimiento_Nombre) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProximoMantenimiento_Km)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id_ProximoMantenimiento }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id_ProximoMantenimiento }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_ProximoMantenimiento })
+            </td>
+        </tr>
+    }
 </table>

@@ -32,7 +32,6 @@ namespace AutoCar360.Controllers
                     Session["UsuarioId"] = user.Id_Usuario;
                     Session["UsuarioNombre"] = user.Usuario_Nombre;
 
-                    // Redirige al controlador VEHICULOS
                     return RedirectToAction("Index", "VEHICULOS");
                 }
 
@@ -48,7 +47,6 @@ namespace AutoCar360.Controllers
             return RedirectToAction("Index");
         }
 
-        // Puedes dejar tus acciones Create, Edit, Delete, etc. debajo si las necesitas
 
         public ActionResult Create()
         {

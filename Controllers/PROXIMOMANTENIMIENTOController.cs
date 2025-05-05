@@ -16,8 +16,21 @@ namespace AutoCar360.Controllers
         // GET: PROXIMOMANTENIMIENTO
         public ActionResult Index()
         {
-            var pROXIMOMANTENIMIENTO = db.PROXIMOMANTENIMIENTO.Include(p => p.MANTENIMIENTOVEHICULO);
-            return View(pROXIMOMANTENIMIENTO.ToList());
+            if (Session["UsuarioId"] == null)
+            {
+                return RedirectToAction("Index", "USUARIOS");
+            }
+
+            int usuarioId = (int)Session["UsuarioId"];
+
+            var proximosMantenimientos = db.PROXIMOMANTENIMIENTO
+                .Include(p => p.MANTENIMIENTOVEHICULO)
+                .Include(p => p.MANTENIMIENTOVEHICULO.VEHICULOS)
+                .Include(p => p.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO)
+                .Where(p => p.MANTENIMIENTOVEHICULO.VEHICULOS.Id_Usuario == usuarioId)
+                .ToList();
+
+            return View(proximosMantenimientos);
         }
 
         // GET: PROXIMOMANTENIMIENTO/Details/5

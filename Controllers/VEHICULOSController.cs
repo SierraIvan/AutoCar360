@@ -52,7 +52,6 @@ namespace AutoCar360.Controllers
         {
             ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre");
             ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre");
-            // Se elimina el dropdown de usuario porque se asignará automáticamente
             return View();
         }
 
