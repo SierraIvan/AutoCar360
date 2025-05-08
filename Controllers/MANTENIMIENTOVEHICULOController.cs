@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -102,10 +103,27 @@ namespace AutoCar360.Controllers
                         db.PROXIMOMANTENIMIENTO.Add(nuevoProximo);
                         db.SaveChanges();
 
+
+
+                        var nuevohistorial = new HISTORIALMANTENIMIENTO
+                        {
+                            Id_MantenimientoVehiculo = mANTENIMIENTOVEHICULO.Id_MantenimientoVehiculo,
+                            HistorialMantenimiento_Km = vehiculo.Vehiculo_KmActuales.Value,
+                            HistorialMantenimiento_Fecha = DateTime.Now,
+
+    
+                            HistorialMantenimiento_Taller = "Taller desconocido",
+                            HistorialMantenimiento_Precio = 0, // o un valor real si lo tienes
+                            HistorialMantenimiento_Comentarios = "Auto-generado por el sistema"
+                        };
+
+                        db.HISTORIALMANTENIMIENTO.Add(nuevohistorial);
+                        db.SaveChanges();
+
                         transaction.Commit();
                         TempData["SuccessMessage"] = $"Mantenimiento creado. Próximo a los {proximoKm} km";
 
-                        return RedirectToAction("Index", "PROXIMOMANTENIMIENTO"); // ✅ Redirección correcta
+                        return RedirectToAction("Index", "PROXIMOMANTENIMIENTO");
                     }
                     catch (Exception ex)
                     {
@@ -120,7 +138,7 @@ namespace AutoCar360.Controllers
             ViewBag.Id_TipoMantenimiento = new SelectList(db.TIPOMANTENIMIENTO, "Id_TipoMantenimiento", "Mantenimiento_Nombre", mANTENIMIENTOVEHICULO.Id_TipoMantenimiento);
             ViewBag.Id_Vehiculo = new SelectList(db.VEHICULOS.Where(v => v.Id_Usuario == usuarioId), "Id_Vehiculo", "Vehiculo_Matricula", mANTENIMIENTOVEHICULO.Id_Vehiculo);
 
-            return View(mANTENIMIENTOVEHICULO); // ✅ Mostrar errores en el formulario si falló
+            return View(mANTENIMIENTOVEHICULO);
         }
 
         // GET: MANTENIMIENTOVEHICULO/Edit/5

@@ -23,5 +23,6 @@ namespace AutoCar360.Controllers
         public string HistorialMantenimiento_Comentarios { get; set; }
     
         public virtual MANTENIMIENTOVEHICULO MANTENIMIENTOVEHICULO { get; set; }
+
     }
 }
