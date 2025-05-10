@@ -53,6 +53,31 @@ namespace AutoCar360.Controllers
             return View();
         }
 
+        // POST: USUARIOS/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(USUARIOS usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Lógica para guardar el usuario
+                    // db.USUARIOS.Add(usuario);
+                    // db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Error al crear el usuario: " + ex.Message);
+                }
+            }
+
+            // Si hay errores, volvemos a mostrar el formulario
+            return View(usuario);
+        }
+
 
     }
 }

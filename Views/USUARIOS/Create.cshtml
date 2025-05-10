@@ -1,52 +1,140 @@
 ﻿@model AutoCar360.Controllers.USUARIOS
-
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Registrarse";
+    Layout = null;
 }
 
-<h2>Create</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Registrarse</title>
+    <style>
+        body {
+            background-color: #0b1d22;
+            color: #00eaff;
+            font-family: 'Arial Black', sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>USUARIOS</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Usuario_Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Usuario_Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Usuario_Nombre, "", new { @class = "text-danger" })
+        input[type="text"],
+        input[type="password"] {
+            width: 250px;
+            padding: 10px;
+            background-color: #10262a;
+            border: none;
+            color: #00eaff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .button {
+            background-color: #10262a;
+            color: #00eaff;
+            padding: 10px 20px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 5px;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+            .button:hover {
+                background-color: #0a1a1d;
+            }
+
+        input[type="submit"].button {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-container {
+            display: inline-block;
+            text-align: left;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        .field-validation-error {
+            color: #ff6b6b;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            position: absolute;
+            width: 100%;
+        }
+
+        .validation-summary-custom {
+            color: #ff6b6b;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            position: absolute;
+            width: 100%;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            position: relative;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function (e) {
+                $('.field-validation-error').remove();
+                $('.validation-summary-custom').remove();
+                var isValid = true;
+
+                if ($('#Usuario_Nombre').val().trim() === '') {
+                    $('#Usuario_Nombre').after('<span class="field-validation-error">El nombre de usuario es requerido</span>');
+                    isValid = false;
+                }
+
+                if ($('#Usuario_Password').val().trim() === '') {
+                    $('#Usuario_Password').after('<span class="field-validation-error">La contraseña es requerida</span>');
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    e.preventDefault();
+                    $('.button-container').append('<div class="validation-summary-custom">Por favor complete todos los campos requeridos</div>');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>AUTOCAR360</h1>
+    <h2>Registrarse</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-container">
+            <label>Nuevo usuario:</label>
+            @Html.TextBoxFor(model => model.Usuario_Nombre, new { @type = "text" })
+
+            <label>Contraseña:</label>
+            @Html.PasswordFor(model => model.Usuario_Password)
+
+            @Html.HiddenFor(model => model.Usuario_FechaRegistro, new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
+
+            <div class="button-container">
+                <input type="submit" value="Crear Usuario" class="button" />
+                <a href="@Url.Action("Index", "USUARIOS")" class="button">Volver</a>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Usuario_Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Usuario_Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Usuario_Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Usuario_FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Usuario_FechaRegistro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Usuario_FechaRegistro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    }
+</body>
+</html>

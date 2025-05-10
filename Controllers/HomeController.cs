@@ -10,7 +10,7 @@ namespace AutoCar360.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "USUARIOS");
         }
 
         public ActionResult About()
