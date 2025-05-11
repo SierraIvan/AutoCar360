@@ -74,7 +74,6 @@ namespace AutoCar360.Controllers
                 }
             }
 
-            // Si hay errores, volvemos a mostrar el formulario
             return View(usuario);
         }
 
