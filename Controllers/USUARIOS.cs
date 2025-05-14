@@ -18,6 +18,7 @@ namespace AutoCar360.Controllers
         public USUARIOS()
         {
             this.VEHICULOS = new HashSet<VEHICULOS>();
+            this.VEHICULOS1 = new HashSet<VEHICULOS>();
         }
     
         public int Id_Usuario { get; set; }
@@ -27,5 +28,7 @@ namespace AutoCar360.Controllers
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VEHICULOS> VEHICULOS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VEHICULOS> VEHICULOS1 { get; set; }
     }
 }

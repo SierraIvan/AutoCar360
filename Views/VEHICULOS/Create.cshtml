@@ -88,7 +88,7 @@
 
         <div class="form-group">
             @Html.Label("Marca")
-            @Html.DropDownList("Id_Marca", null, "-- Selecciona una marca --")
+            @Html.DropDownList("Id_Marca", null, "-- Selecciona una marca --", new { @id = "Id_Marca" })
         </div>
 
         <div class="form-group">
@@ -98,22 +98,31 @@
 
         <div class="form-group">
             @Html.Label("Color")
-            @Html.DropDownList("Id_Color", ViewBag.Id_Color as SelectList, "Seleccione un color")
+            @Html.DropDownList("Id_Color", ViewBag.Id_Color as SelectList, "Seleccione un color", new { @id = "Id_Color" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Vehiculo_Matricula)
-            @Html.EditorFor(model => model.Vehiculo_Matricula)
+            @Html.EditorFor(model => model.Vehiculo_Matricula, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehiculo_Matricula, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Vehiculo_Fecha_Matriculacion)
-            @Html.EditorFor(model => model.Vehiculo_Fecha_Matriculacion)
+            @Html.EditorFor(model => model.Vehiculo_Fecha_Matriculacion, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehiculo_Fecha_Matriculacion, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Vehiculo_Bastidor)
-            @Html.EditorFor(model => model.Vehiculo_Bastidor)
+            @Html.EditorFor(model => model.Vehiculo_Bastidor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehiculo_Bastidor, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehiculo_KmActuales)
+            @Html.EditorFor(model => model.Vehiculo_KmActuales, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vehiculo_KmActuales, "", new { @class = "text-danger" })
         </div>
 
     </div>
@@ -132,7 +141,7 @@
                 var idMarca = $(this).val();
                 var $modeloDropdown = $('#Id_Modelo');
 
-                $modeloDropdown.empty().append($('<option>').text('Cargando...'));
+                $modeloDropdown.empty().append($('<option>').text('Cargando...').attr('value', ''));
 
                 if (idMarca !== '') {
                     $.ajax({
@@ -145,10 +154,13 @@
                             $.each(data, function (index, modelo) {
                                 $modeloDropdown.append($('<option>').text(modelo.Modelo_Nombre).attr('value', modelo.Id_Modelo));
                             });
+                        },
+                        error: function () {
+                            $modeloDropdown.empty().append($('<option>').text('Error al cargar modelos').attr('value', ''));
                         }
                     });
                 } else {
-                    $modeloDropdown.empty().append($('<option>').text('Seleccione una marca primero'));
+                    $modeloDropdown.empty().append($('<option>').text('Seleccione una marca primero').attr('value', ''));
                 }
             });
         });

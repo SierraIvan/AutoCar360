@@ -1,0 +1,27 @@
+﻿@model AutoCar360.Controllers.TIPOREVISIONES
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TIPOREVISIONES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Revision_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Revision_Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_TipoRevision }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

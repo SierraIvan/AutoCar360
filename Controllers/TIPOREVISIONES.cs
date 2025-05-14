@@ -22,7 +22,6 @@ namespace AutoCar360.Controllers
     
         public int Id_TipoRevision { get; set; }
         public string Revision_Nombre { get; set; }
-        public string Revision_Intervalo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REVISIONESVEHICULO> REVISIONESVEHICULO { get; set; }

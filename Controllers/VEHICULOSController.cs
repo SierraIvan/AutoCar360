@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -51,52 +52,93 @@ namespace AutoCar360.Controllers
         // GET: VEHICULOS/Create
         public ActionResult Create()
         {
+            if (Session["UsuarioId"] == null)
+            {
+                return RedirectToAction("Index", "USUARIOS");
+            }
+
             ViewBag.Id_Color = new SelectList(db.COLORES.OrderBy(c => c.Color_Nombre), "Id_Color", "Color_Nombre");
             ViewBag.Id_Marca = new SelectList(db.MARCAS.OrderBy(m => m.Marca_Nombre), "Id_Marca", "Marca_Nombre");
             ViewBag.Id_Modelo = new SelectList(Enumerable.Empty<SelectListItem>());
+
             return View();
         }
 
-        // POST: VEHICULOS/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales")] VEHICULOS vehiculo)
+        public ActionResult Create([Bind(Include = "Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales,Id_Usuario")] VEHICULOS vehiculo)
         {
             if (Session["UsuarioId"] == null)
             {
                 return RedirectToAction("Index", "USUARIOS");
             }
 
+            // Asignar el ID de usuario desde la sesión
+            vehiculo.Id_Usuario = (int)Session["UsuarioId"];
+
+            // Validar que modelo y color existan
+            var modeloExistente = db.MODELOS.Any(m => m.Id_Modelo == vehiculo.Id_Modelo);
+            var colorExistente = db.COLORES.Any(c => c.Id_Color == vehiculo.Id_Color);
+
+            if (!modeloExistente)
+            {
+                ModelState.AddModelError("Id_Modelo", "El modelo seleccionado no existe");
+            }
+
+            if (!colorExistente)
+            {
+                ModelState.AddModelError("Id_Color", "El color seleccionado no existe");
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    vehiculo.Id_Usuario = (int)Session["UsuarioId"];
                     db.VEHICULOS.Add(vehiculo);
                     db.SaveChanges();
                     return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Error al guardar en la base de datos: " + ex.Message);
                 }
             }
-            else
+
+            // Log de errores de validación
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            foreach (var error in errors)
             {
-                // Mostrar errores de validación
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
-                }
+                System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
             }
 
+            // Recargar los dropdowns necesarios
             ViewBag.Id_Color = new SelectList(db.COLORES.OrderBy(c => c.Color_Nombre), "Id_Color", "Color_Nombre", vehiculo.Id_Color);
             ViewBag.Id_Marca = new SelectList(db.MARCAS.OrderBy(m => m.Marca_Nombre), "Id_Marca", "Marca_Nombre");
-            ViewBag.Id_Modelo = new SelectList(db.MODELOS.Where(m => m.Id_Marca == db.MODELOS.Where(x => x.Id_Modelo == vehiculo.Id_Modelo).Select(x => x.Id_Marca).FirstOrDefault()), "Id_Modelo", "Modelo_Nombre", vehiculo.Id_Modelo);
+
+            // Cargar modelos de la marca seleccionada
+            if (vehiculo.Id_Modelo > 0)
+            {
+                var marcaDelModelo = db.MODELOS.Where(m => m.Id_Modelo == vehiculo.Id_Modelo).Select(m => m.Id_Marca).FirstOrDefault();
+                ViewBag.Id_Modelo = new SelectList(db.MODELOS.Where(m => m.Id_Marca == marcaDelModelo), "Id_Modelo", "Modelo_Nombre", vehiculo.Id_Modelo);
+            }
+            else
+            {
+                ViewBag.Id_Modelo = new SelectList(Enumerable.Empty<SelectListItem>());
+            }
+
             return View(vehiculo);
         }
 
-        // AJAX: Obtener modelos por marca
         public JsonResult GetModelosByMarca(int idMarca)
         {
             var modelos = db.MODELOS

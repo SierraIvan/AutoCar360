@@ -113,7 +113,7 @@ namespace AutoCar360.Controllers
 
     
                             HistorialMantenimiento_Taller = "Taller desconocido",
-                            HistorialMantenimiento_Precio = 0, // o un valor real si lo tienes
+                            HistorialMantenimiento_Precio = 0,
                             HistorialMantenimiento_Comentarios = "Auto-generado por el sistema"
                         };
 

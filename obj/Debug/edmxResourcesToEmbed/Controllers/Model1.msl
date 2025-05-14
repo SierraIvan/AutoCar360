@@ -95,9 +95,10 @@
     <EntitySetMapping Name="PROXIMASREVISIONES">
       <EntityTypeMapping TypeName="AutoCar360Model.PROXIMASREVISIONES">
         <MappingFragment StoreEntitySet="PROXIMASREVISIONES">
+          <ScalarProperty Name="ProximaRevision_intervaloTiempo" ColumnName="ProximaRevision_intervaloTiempo" />
+          <ScalarProperty Name="ProximaRevision_intervaloKm" ColumnName="ProximaRevision_intervaloKm" />
           <ScalarProperty Name="Id_ProximaRevision" ColumnName="Id_ProximaRevision" />
           <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
-          <ScalarProperty Name="ProximaRevision_intervalo" ColumnName="ProximaRevision_intervalo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -113,10 +114,11 @@
     <EntitySetMapping Name="REVISIONESVEHICULO">
       <EntityTypeMapping TypeName="AutoCar360Model.REVISIONESVEHICULO">
         <MappingFragment StoreEntitySet="REVISIONESVEHICULO">
+          <ScalarProperty Name="RevisionesVehiculo_IntervaloTiempo" ColumnName="RevisionesVehiculo_IntervaloTiempo" />
+          <ScalarProperty Name="RevisionesVehiculo_Intervalokm" ColumnName="RevisionesVehiculo_Intervalokm" />
           <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
           <ScalarProperty Name="Id_TipoRevision" ColumnName="Id_TipoRevision" />
           <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
-          <ScalarProperty Name="RevisionesVehiculo_Intervalo" ColumnName="RevisionesVehiculo_Intervalo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -152,7 +154,6 @@
         <MappingFragment StoreEntitySet="TIPOREVISIONES">
           <ScalarProperty Name="Id_TipoRevision" ColumnName="Id_TipoRevision" />
           <ScalarProperty Name="Revision_Nombre" ColumnName="Revision_Nombre" />
-          <ScalarProperty Name="Revision_Intervalo" ColumnName="Revision_Intervalo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

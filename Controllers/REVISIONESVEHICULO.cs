@@ -24,7 +24,8 @@ namespace AutoCar360.Controllers
         public int Id_RevisionesVehiculo { get; set; }
         public Nullable<int> Id_TipoRevision { get; set; }
         public Nullable<int> Id_Vehiculo { get; set; }
-        public Nullable<int> RevisionesVehiculo_Intervalo { get; set; }
+        public Nullable<int> RevisionesVehiculo_Intervalokm { get; set; }
+        public Nullable<System.DateTime> RevisionesVehiculo_IntervaloTiempo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HISTORIALREVISIONES> HISTORIALREVISIONES { get; set; }

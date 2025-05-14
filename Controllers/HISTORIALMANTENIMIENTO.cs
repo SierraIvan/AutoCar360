@@ -16,13 +16,12 @@ namespace AutoCar360.Controllers
     {
         public int Id_HistorialMantenimiento { get; set; }
         public Nullable<int> Id_MantenimientoVehiculo { get; set; }
-        public Nullable<System.DateTime> HistorialMantenimiento_Fecha { get; set; }
+        public System.DateTime HistorialMantenimiento_Fecha { get; set; }
         public string HistorialMantenimiento_Taller { get; set; }
         public Nullable<double> HistorialMantenimiento_Precio { get; set; }
         public Nullable<int> HistorialMantenimiento_Km { get; set; }
         public string HistorialMantenimiento_Comentarios { get; set; }
     
         public virtual MANTENIMIENTOVEHICULO MANTENIMIENTOVEHICULO { get; set; }
-
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AutoCar360Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AutoCar360Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CARROCERIAS">
           <Key>
             <PropertyRef Name="Id_Carroceria" />
@@ -41,7 +41,7 @@
           </Key>
           <Property Name="Id_HistorialMantenimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_MantenimientoVehiculo" Type="int" />
-          <Property Name="HistorialMantenimiento_Fecha" Type="date" />
+          <Property Name="HistorialMantenimiento_Fecha" Type="date" Nullable="false" />
           <Property Name="HistorialMantenimiento_Taller" Type="varchar" MaxLength="250" />
           <Property Name="HistorialMantenimiento_Precio" Type="float" />
           <Property Name="HistorialMantenimiento_Km" Type="int" />
@@ -93,7 +93,8 @@
           </Key>
           <Property Name="Id_ProximaRevision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_RevisionesVehiculo" Type="int" />
-          <Property Name="ProximaRevision_intervalo" Type="varchar" MaxLength="10" />
+          <Property Name="ProximaRevision_intervaloKm" Type="int" />
+          <Property Name="ProximaRevision_intervaloTiempo" Type="date" />
         </EntityType>
         <EntityType Name="PROXIMOMANTENIMIENTO">
           <Key>
@@ -110,7 +111,8 @@
           <Property Name="Id_RevisionesVehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_TipoRevision" Type="int" />
           <Property Name="Id_Vehiculo" Type="int" />
-          <Property Name="RevisionesVehiculo_Intervalo" Type="int" />
+          <Property Name="RevisionesVehiculo_Intervalokm" Type="int" />
+          <Property Name="RevisionesVehiculo_IntervaloTiempo" Type="date" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -142,7 +144,6 @@
           </Key>
           <Property Name="Id_TipoRevision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Revision_Nombre" Type="varchar" MaxLength="150" />
-          <Property Name="Revision_Intervalo" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="TIPOVEHICULO">
           <Key>
@@ -373,7 +374,7 @@
               <PropertyRef Name="Id_Usuario" />
             </Principal>
             <Dependent Role="VEHICULOS">
-              <PropertyRef Name="Id_Modelo" />
+              <PropertyRef Name="Id_Usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -497,8 +498,7 @@
             <End Role="VEHICULOS" EntitySet="VEHICULOS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AutoCar360Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -543,7 +543,7 @@
           </Key>
           <Property Name="Id_HistorialMantenimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_MantenimientoVehiculo" Type="Int32" />
-          <Property Name="HistorialMantenimiento_Fecha" Type="DateTime" Precision="0" />
+          <Property Name="HistorialMantenimiento_Fecha" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="HistorialMantenimiento_Taller" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="HistorialMantenimiento_Precio" Type="Double" />
           <Property Name="HistorialMantenimiento_Km" Type="Int32" />
@@ -608,8 +608,9 @@
           </Key>
           <Property Name="Id_ProximaRevision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_RevisionesVehiculo" Type="Int32" />
-          <Property Name="ProximaRevision_intervalo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="REVISIONESVEHICULO" Relationship="Self.FK_PROXIMASREVISIONES_REVISIONESVEHICULO" FromRole="PROXIMASREVISIONES" ToRole="REVISIONESVEHICULO" />
+          <Property Name="ProximaRevision_intervaloKm" Type="Int32" />
+          <Property Name="ProximaRevision_intervaloTiempo" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="PROXIMOMANTENIMIENTO">
           <Key>
@@ -627,11 +628,12 @@
           <Property Name="Id_RevisionesVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_TipoRevision" Type="Int32" />
           <Property Name="Id_Vehiculo" Type="Int32" />
-          <Property Name="RevisionesVehiculo_Intervalo" Type="Int32" />
           <NavigationProperty Name="HISTORIALREVISIONES" Relationship="Self.FK_HISTORIALREVISIONES_REVISIONESVEHICULO" FromRole="REVISIONESVEHICULO" ToRole="HISTORIALREVISIONES" />
           <NavigationProperty Name="PROXIMASREVISIONES" Relationship="Self.FK_PROXIMASREVISIONES_REVISIONESVEHICULO" FromRole="REVISIONESVEHICULO" ToRole="PROXIMASREVISIONES" />
           <NavigationProperty Name="TIPOREVISIONES" Relationship="Self.FK_REVISIONESVEHICULO_TIPOREVISIONES" FromRole="REVISIONESVEHICULO" ToRole="TIPOREVISIONES" />
           <NavigationProperty Name="VEHICULOS" Relationship="Self.FK_REVISIONESVEHICULO_VEHICULOS" FromRole="REVISIONESVEHICULO" ToRole="VEHICULOS" />
+          <Property Name="RevisionesVehiculo_Intervalokm" Type="Int32" />
+          <Property Name="RevisionesVehiculo_IntervaloTiempo" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -665,7 +667,6 @@
           </Key>
           <Property Name="Id_TipoRevision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Revision_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Revision_Intervalo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="REVISIONESVEHICULO" Relationship="Self.FK_REVISIONESVEHICULO_TIPOREVISIONES" FromRole="TIPOREVISIONES" ToRole="REVISIONESVEHICULO" />
         </EntityType>
         <EntityType Name="TIPOVEHICULO">
@@ -685,6 +686,7 @@
           <Property Name="Usuario_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Usuario_FechaRegistro" Type="DateTime" Precision="0" />
           <NavigationProperty Name="VEHICULOS" Relationship="Self.FK_VEHICULOS_USUARIOS" FromRole="USUARIOS" ToRole="VEHICULOS" />
+          <NavigationProperty Name="VEHICULOS1" Relationship="AutoCar360Model.FK_VEHICULOS_USUARIOS1" FromRole="USUARIOS" ToRole="VEHICULOS" />
         </EntityType>
         <EntityType Name="VEHICULOS">
           <Key>
@@ -703,6 +705,7 @@
           <NavigationProperty Name="MODELOS" Relationship="Self.FK_VEHICULOS_MODELOS" FromRole="VEHICULOS" ToRole="MODELOS" />
           <NavigationProperty Name="REVISIONESVEHICULO" Relationship="Self.FK_REVISIONESVEHICULO_VEHICULOS" FromRole="VEHICULOS" ToRole="REVISIONESVEHICULO" />
           <NavigationProperty Name="USUARIOS" Relationship="Self.FK_VEHICULOS_USUARIOS" FromRole="VEHICULOS" ToRole="USUARIOS" />
+          <NavigationProperty Name="USUARIOS1" Relationship="AutoCar360Model.FK_VEHICULOS_USUARIOS1" FromRole="VEHICULOS" ToRole="USUARIOS" />
         </EntityType>
         <Association Name="FK_CARROCERIAS_TIPOVEHICULO">
           <End Role="TIPOVEHICULO" Type="Self.TIPOVEHICULO" Multiplicity="0..1" />
@@ -1026,6 +1029,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_VEHICULOS_USUARIOS1" Association="AutoCar360Model.FK_VEHICULOS_USUARIOS1">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="VEHICULOS" EntitySet="VEHICULOS" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1038,6 +1045,18 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_VEHICULOS_USUARIOS1">
+          <End Type="AutoCar360Model.USUARIOS" Role="USUARIOS" Multiplicity="0..1" />
+          <End Type="AutoCar360Model.VEHICULOS" Role="VEHICULOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="VEHICULOS">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1138,9 +1157,10 @@
           <EntitySetMapping Name="PROXIMASREVISIONES">
             <EntityTypeMapping TypeName="AutoCar360Model.PROXIMASREVISIONES">
               <MappingFragment StoreEntitySet="PROXIMASREVISIONES">
+                <ScalarProperty Name="ProximaRevision_intervaloTiempo" ColumnName="ProximaRevision_intervaloTiempo" />
+                <ScalarProperty Name="ProximaRevision_intervaloKm" ColumnName="ProximaRevision_intervaloKm" />
                 <ScalarProperty Name="Id_ProximaRevision" ColumnName="Id_ProximaRevision" />
                 <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
-                <ScalarProperty Name="ProximaRevision_intervalo" ColumnName="ProximaRevision_intervalo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1156,10 +1176,11 @@
           <EntitySetMapping Name="REVISIONESVEHICULO">
             <EntityTypeMapping TypeName="AutoCar360Model.REVISIONESVEHICULO">
               <MappingFragment StoreEntitySet="REVISIONESVEHICULO">
+                <ScalarProperty Name="RevisionesVehiculo_IntervaloTiempo" ColumnName="RevisionesVehiculo_IntervaloTiempo" />
+                <ScalarProperty Name="RevisionesVehiculo_Intervalokm" ColumnName="RevisionesVehiculo_Intervalokm" />
                 <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
                 <ScalarProperty Name="Id_TipoRevision" ColumnName="Id_TipoRevision" />
                 <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
-                <ScalarProperty Name="RevisionesVehiculo_Intervalo" ColumnName="RevisionesVehiculo_Intervalo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1195,7 +1216,6 @@
               <MappingFragment StoreEntitySet="TIPOREVISIONES">
                 <ScalarProperty Name="Id_TipoRevision" ColumnName="Id_TipoRevision" />
                 <ScalarProperty Name="Revision_Nombre" ColumnName="Revision_Nombre" />
-                <ScalarProperty Name="Revision_Intervalo" ColumnName="Revision_Intervalo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1270,7 +1290,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>

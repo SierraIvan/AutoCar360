@@ -36,7 +36,7 @@
     </Key>
     <Property Name="Id_HistorialMantenimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Id_MantenimientoVehiculo" Type="int" />
-    <Property Name="HistorialMantenimiento_Fecha" Type="date" />
+    <Property Name="HistorialMantenimiento_Fecha" Type="date" Nullable="false" />
     <Property Name="HistorialMantenimiento_Taller" Type="varchar" MaxLength="250" />
     <Property Name="HistorialMantenimiento_Precio" Type="float" />
     <Property Name="HistorialMantenimiento_Km" Type="int" />
@@ -88,7 +88,8 @@
     </Key>
     <Property Name="Id_ProximaRevision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Id_RevisionesVehiculo" Type="int" />
-    <Property Name="ProximaRevision_intervalo" Type="varchar" MaxLength="10" />
+    <Property Name="ProximaRevision_intervaloKm" Type="int" />
+    <Property Name="ProximaRevision_intervaloTiempo" Type="date" />
   </EntityType>
   <EntityType Name="PROXIMOMANTENIMIENTO">
     <Key>
@@ -105,7 +106,8 @@
     <Property Name="Id_RevisionesVehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Id_TipoRevision" Type="int" />
     <Property Name="Id_Vehiculo" Type="int" />
-    <Property Name="RevisionesVehiculo_Intervalo" Type="int" />
+    <Property Name="RevisionesVehiculo_Intervalokm" Type="int" />
+    <Property Name="RevisionesVehiculo_IntervaloTiempo" Type="date" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -137,7 +139,6 @@
     </Key>
     <Property Name="Id_TipoRevision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Revision_Nombre" Type="varchar" MaxLength="150" />
-    <Property Name="Revision_Intervalo" Type="varchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="TIPOVEHICULO">
     <Key>
@@ -368,7 +369,7 @@
         <PropertyRef Name="Id_Usuario" />
       </Principal>
       <Dependent Role="VEHICULOS">
-        <PropertyRef Name="Id_Modelo" />
+        <PropertyRef Name="Id_Usuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

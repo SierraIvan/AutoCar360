@@ -141,6 +141,7 @@
     <Compile Include="Controllers\HISTORIALREVISIONES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\HISTORIALREVISIONESController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MANTENIMIENTOVEHICULO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -171,6 +172,7 @@
     <Compile Include="Controllers\PROXIMASREVISIONES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PROXIMASREVISIONESController.cs" />
     <Compile Include="Controllers\PROXIMOMANTENIMIENTO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -197,6 +199,7 @@
     <Compile Include="Controllers\TIPOREVISIONES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\TIPOREVISIONESController.cs" />
     <Compile Include="Controllers\TIPOVEHICULO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -212,7 +215,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\ProximoMantenimientoViewModel.cs" />
+    <Compile Include="Models\REVISIONESVEHICULO.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Models\VEHICULOS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -325,9 +328,16 @@
     <Content Include="Views\HISTORIALMANTENIMIENTO\Details.cshtml" />
     <Content Include="Views\HISTORIALMANTENIMIENTO\Edit.cshtml" />
     <Content Include="Views\HISTORIALMANTENIMIENTO\Index.cshtml" />
+    <Content Include="Views\TIPOREVISIONES\Create.cshtml" />
+    <Content Include="Views\TIPOREVISIONES\Delete.cshtml" />
+    <Content Include="Views\TIPOREVISIONES\Details.cshtml" />
+    <Content Include="Views\TIPOREVISIONES\Edit.cshtml" />
+    <Content Include="Views\TIPOREVISIONES\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\HISTORIALREVISIONES\" />
+    <Folder Include="Views\PROXIMASREVISIONES\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

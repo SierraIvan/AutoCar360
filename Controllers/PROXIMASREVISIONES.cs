@@ -16,7 +16,8 @@ namespace AutoCar360.Controllers
     {
         public int Id_ProximaRevision { get; set; }
         public Nullable<int> Id_RevisionesVehiculo { get; set; }
-        public string ProximaRevision_intervalo { get; set; }
+        public Nullable<int> ProximaRevision_intervaloKm { get; set; }
+        public Nullable<System.DateTime> ProximaRevision_intervaloTiempo { get; set; }
     
         public virtual REVISIONESVEHICULO REVISIONESVEHICULO { get; set; }
     }
