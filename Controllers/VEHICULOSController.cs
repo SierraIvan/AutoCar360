@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoCar360.Models; // Asegúrate de incluir el namespace del modelo
 
 namespace AutoCar360.Controllers
 {
@@ -39,26 +40,27 @@ namespace AutoCar360.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VEHICULOS vEHICULOS = db.VEHICULOS.Find(id);
-            if (vEHICULOS == null)
+            VEHICULOS vehiculo = db.VEHICULOS.Find(id);
+            if (vehiculo == null)
             {
                 return HttpNotFound();
             }
-            return View(vEHICULOS);
+            return View(vehiculo);
         }
 
         // GET: VEHICULOS/Create
         public ActionResult Create()
         {
-            ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre");
-            ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre");
+            ViewBag.Id_Color = new SelectList(db.COLORES.OrderBy(c => c.Color_Nombre), "Id_Color", "Color_Nombre");
+            ViewBag.Id_Marca = new SelectList(db.MARCAS.OrderBy(m => m.Marca_Nombre), "Id_Marca", "Marca_Nombre");
+            ViewBag.Id_Modelo = new SelectList(Enumerable.Empty<SelectListItem>());
             return View();
         }
 
         // POST: VEHICULOS/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales")] VEHICULOS vEHICULOS)
+        public ActionResult Create([Bind(Include = "Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales")] VEHICULOS vehiculo)
         {
             if (Session["UsuarioId"] == null)
             {
@@ -67,15 +69,45 @@ namespace AutoCar360.Controllers
 
             if (ModelState.IsValid)
             {
-                vEHICULOS.Id_Usuario = (int)Session["UsuarioId"];
-                db.VEHICULOS.Add(vEHICULOS);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    vehiculo.Id_Usuario = (int)Session["UsuarioId"];
+                    db.VEHICULOS.Add(vehiculo);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Error al guardar en la base de datos: " + ex.Message);
+                }
+            }
+            else
+            {
+                // Mostrar errores de validación
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
+                }
             }
 
-            ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vEHICULOS.Id_Color);
-            ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vEHICULOS.Id_Modelo);
-            return View(vEHICULOS);
+            ViewBag.Id_Color = new SelectList(db.COLORES.OrderBy(c => c.Color_Nombre), "Id_Color", "Color_Nombre", vehiculo.Id_Color);
+            ViewBag.Id_Marca = new SelectList(db.MARCAS.OrderBy(m => m.Marca_Nombre), "Id_Marca", "Marca_Nombre");
+            ViewBag.Id_Modelo = new SelectList(db.MODELOS.Where(m => m.Id_Marca == db.MODELOS.Where(x => x.Id_Modelo == vehiculo.Id_Modelo).Select(x => x.Id_Marca).FirstOrDefault()), "Id_Modelo", "Modelo_Nombre", vehiculo.Id_Modelo);
+            return View(vehiculo);
+        }
+
+        // AJAX: Obtener modelos por marca
+        public JsonResult GetModelosByMarca(int idMarca)
+        {
+            var modelos = db.MODELOS
+                            .Where(m => m.Id_Marca == idMarca)
+                            .OrderBy(m => m.Modelo_Nombre)
+                            .Select(m => new {
+                                Id_Modelo = m.Id_Modelo,
+                                Modelo_Nombre = m.Modelo_Nombre
+                            }).ToList();
+
+            return Json(modelos, JsonRequestBehavior.AllowGet);
         }
 
         // GET: VEHICULOS/Edit/5
@@ -85,32 +117,32 @@ namespace AutoCar360.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VEHICULOS vEHICULOS = db.VEHICULOS.Find(id);
-            if (vEHICULOS == null)
+            VEHICULOS vehiculo = db.VEHICULOS.Find(id);
+            if (vehiculo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vEHICULOS.Id_Color);
-            ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vEHICULOS.Id_Modelo);
-            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Usuario);
-            return View(vEHICULOS);
+            ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vehiculo.Id_Color);
+            ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vehiculo.Id_Modelo);
+            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vehiculo.Id_Usuario);
+            return View(vehiculo);
         }
 
         // POST: VEHICULOS/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_Vehiculo,Id_Usuario,Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales")] VEHICULOS vEHICULOS)
+        public ActionResult Edit([Bind(Include = "Id_Vehiculo,Id_Usuario,Id_Modelo,Id_Color,Vehiculo_Matricula,Vehiculo_Fecha_Matriculacion,Vehiculo_Bastidor,Vehiculo_KmActuales")] VEHICULOS vehiculo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vEHICULOS).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(vehiculo).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vEHICULOS.Id_Color);
-            ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vEHICULOS.Id_Modelo);
-            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vEHICULOS.Id_Usuario);
-            return View(vEHICULOS);
+            ViewBag.Id_Color = new SelectList(db.COLORES, "Id_Color", "Color_Nombre", vehiculo.Id_Color);
+            ViewBag.Id_Modelo = new SelectList(db.MODELOS, "Id_Modelo", "Modelo_Nombre", vehiculo.Id_Modelo);
+            ViewBag.Id_Usuario = new SelectList(db.USUARIOS, "Id_Usuario", "Usuario_Nombre", vehiculo.Id_Usuario);
+            return View(vehiculo);
         }
 
         // GET: VEHICULOS/Delete/5
@@ -120,12 +152,12 @@ namespace AutoCar360.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VEHICULOS vEHICULOS = db.VEHICULOS.Find(id);
-            if (vEHICULOS == null)
+            VEHICULOS vehiculo = db.VEHICULOS.Find(id);
+            if (vehiculo == null)
             {
                 return HttpNotFound();
             }
-            return View(vEHICULOS);
+            return View(vehiculo);
         }
 
         // POST: VEHICULOS/Delete/5
@@ -133,8 +165,8 @@ namespace AutoCar360.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            VEHICULOS vEHICULOS = db.VEHICULOS.Find(id);
-            db.VEHICULOS.Remove(vEHICULOS);
+            VEHICULOS vehiculo = db.VEHICULOS.Find(id);
+            db.VEHICULOS.Remove(vehiculo);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

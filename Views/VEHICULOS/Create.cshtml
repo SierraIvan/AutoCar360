@@ -5,76 +5,152 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<style>
+    body {
+        background-color: #1c2c2c;
+        color: #00cfff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+    }
+
+    h2 {
+        color: #00cfff;
+        margin-bottom: 40px;
+        font-size: 32px;
+    }
+
+    .form-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        flex: 0 0 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .form-group label {
+            color: #00cfff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-group select,
+        .form-group input {
+            background-color: #2d3f3f;
+            border: none;
+            color: #00cfff;
+            padding: 8px;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+    .buttons {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+    }
+
+        .buttons input,
+        .buttons a {
+            background-color: #2d3f3f;
+            border: none;
+            color: #00cfff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+    .text-danger {
+        color: red;
+    }
+</style>
+
+<h2>Próximos Mantenimientos</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>VEHICULOS</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id_Usuario)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @* Campo oculto para el Id_Usuario (opcional si ya lo asignas en el controlador) *@
-        @Html.HiddenFor(model => model.Id_Usuario)
+    <div class="form-container">
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Id_Modelo, "Modelo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Id_Modelo", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id_Modelo, "", new { @class = "text-danger" })
-            </div>
+            @Html.Label("Marca")
+            @Html.DropDownList("Id_Marca", null, "-- Selecciona una marca --")
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Id_Color, "Color", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Id_Color", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id_Color, "", new { @class = "text-danger" })
-            </div>
+            @Html.Label("Modelo")
+            @Html.DropDownList("Id_Modelo", ViewBag.Id_Modelo as SelectList, "Seleccione un modelo", new { @id = "Id_Modelo" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Vehiculo_Matricula, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vehiculo_Matricula, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Vehiculo_Matricula, "", new { @class = "text-danger" })
-            </div>
+            @Html.Label("Color")
+            @Html.DropDownList("Id_Color", ViewBag.Id_Color as SelectList, "Seleccione un color")
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Vehiculo_Fecha_Matriculacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vehiculo_Fecha_Matriculacion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Vehiculo_Fecha_Matriculacion, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Vehiculo_Matricula)
+            @Html.EditorFor(model => model.Vehiculo_Matricula)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Vehiculo_Bastidor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vehiculo_Bastidor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Vehiculo_Bastidor, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Vehiculo_Fecha_Matriculacion)
+            @Html.EditorFor(model => model.Vehiculo_Fecha_Matriculacion)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Vehiculo_KmActuales, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vehiculo_KmActuales, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Vehiculo_KmActuales, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Vehiculo_Bastidor)
+            @Html.EditorFor(model => model.Vehiculo_Bastidor)
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+    </div>
+
+    <div class="buttons">
+        <input type="submit" value="Crear" />
+        @Html.ActionLink("Volver", "Index")
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#Id_Marca').change(function () {
+                var idMarca = $(this).val();
+                var $modeloDropdown = $('#Id_Modelo');
+
+                $modeloDropdown.empty().append($('<option>').text('Cargando...'));
+
+                if (idMarca !== '') {
+                    $.ajax({
+                        url: '@Url.Action("GetModelosByMarca", "VEHICULOS")',
+                        type: 'GET',
+                        data: { idMarca: idMarca },
+                        success: function (data) {
+                            $modeloDropdown.empty();
+                            $modeloDropdown.append($('<option>').text('Seleccione un modelo').attr('value', ''));
+                            $.each(data, function (index, modelo) {
+                                $modeloDropdown.append($('<option>').text(modelo.Modelo_Nombre).attr('value', modelo.Id_Modelo));
+                            });
+                        }
+                    });
+                } else {
+                    $modeloDropdown.empty().append($('<option>').text('Seleccione una marca primero'));
+                }
+            });
+        });
+    </script>
+}
