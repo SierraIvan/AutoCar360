@@ -1,65 +1,79 @@
 ﻿@model IEnumerable<AutoCar360.Controllers.HISTORIALMANTENIMIENTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Historial Mantenimiento";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
+    body {
+        background-color: #132526;
+        color: #00e1ff;
+        font-family: Arial, sans-serif;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Taller)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Km)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Comentarios)
-        </th>
-        <th>
-            Tipo de Mantenimiento
-        </th>
-        <th></th>
-    </tr>
+    h2 {
+        text-align: center;
+        color: #00e1ff;
+        margin-bottom: 30px;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @(( (DateTime)item.HistorialMantenimiento_Fecha ).ToString("yyyy-MM-dd"))
+    .card {
+        background-color: #1e2d2f;
+        padding: 20px;
+        margin: 20px 80px;
+        border-radius: 5px;
+        justify-content: space-between;
+        align-items: flex-start;
+        display:inline-flex;
+        width:400px;
+    }
 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialMantenimiento_Taller)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialMantenimiento_Precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialMantenimiento_Km)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialMantenimiento_Comentarios)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO.Mantenimiento_Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id_HistorialMantenimiento }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id_HistorialMantenimiento }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id_HistorialMantenimiento })
-        </td>
-    </tr>
+    .card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+        .card-info label {
+            font-weight: bold;
+            color: #00e1ff;
+        }
+
+    .card-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+        .card-buttons a {
+            background-color: #132526;
+            color: #00e1ff;
+            text-decoration: none;
+            padding: 6px 12px;
+            text-align: center;
+            display: inline-block;
+            border: none;
+        }
+
+            .card-buttons a:hover {
+                background-color: #00e1ff;
+                color: #132526;
+            }
+</style>
+
+<h2>Historial Mantenimiento</h2>
+
+@foreach (var item in Model)
+{
+    <div class="card">
+        <div class="card-info">
+            <div><label>Matrícula:</label> @item.MANTENIMIENTOVEHICULO.VEHICULOS.Vehiculo_Matricula</div>
+            <div><label>Fecha:</label> @(( (DateTime)item.HistorialMantenimiento_Fecha ).ToString("yyyy-MM-dd"))</div>
+            <div><label>Tipo de cambio:</label> @item.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO.Mantenimiento_Nombre</div>
+        </div>
+        <div class="card-buttons">
+            <a href="@Url.Action("Edit", new { id = item.Id_HistorialMantenimiento })">Editar</a>
+            <a href="@Url.Action("Details", new { id = item.Id_HistorialMantenimiento })">Mostrar Datos</a>
+        </div>
+    </div>
 }
-
-</table>

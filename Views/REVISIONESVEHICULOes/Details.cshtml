@@ -1,0 +1,51 @@
+﻿@model AutoCar360.Controllers.REVISIONESVEHICULO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>REVISIONESVEHICULO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RevisionesVehiculo_Intervalokm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RevisionesVehiculo_Intervalokm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RevisionesVehiculo_IntervaloTiempo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RevisionesVehiculo_IntervaloTiempo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPOREVISIONES.Revision_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPOREVISIONES.Revision_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VEHICULOS.Vehiculo_Matricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VEHICULOS.Vehiculo_Matricula)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_RevisionesVehiculo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

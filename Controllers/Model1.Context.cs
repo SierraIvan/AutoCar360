@@ -38,7 +38,6 @@ namespace AutoCar360.Controllers
         public virtual DbSet<MODELOS> MODELOS { get; set; }
         public virtual DbSet<PROXIMASREVISIONES> PROXIMASREVISIONES { get; set; }
         public virtual DbSet<PROXIMOMANTENIMIENTO> PROXIMOMANTENIMIENTO { get; set; }
-        public virtual DbSet<REVISIONESVEHICULO> REVISIONESVEHICULO { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TIPOCAMBIO> TIPOCAMBIO { get; set; }
         public virtual DbSet<TIPOMANTENIMIENTO> TIPOMANTENIMIENTO { get; set; }
@@ -46,6 +45,7 @@ namespace AutoCar360.Controllers
         public virtual DbSet<TIPOVEHICULO> TIPOVEHICULO { get; set; }
         public virtual DbSet<USUARIOS> USUARIOS { get; set; }
         public virtual DbSet<VEHICULOS> VEHICULOS { get; set; }
+        public virtual DbSet<REVISIONESVEHICULO> REVISIONESVEHICULO { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

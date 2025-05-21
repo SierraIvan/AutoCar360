@@ -561,7 +561,7 @@
           <Property Name="HistorialRevisiones_Precio" Type="Double" />
           <Property Name="HistorialRevisiones_km" Type="Int32" />
           <Property Name="HistorialRevisiones_Comentarios" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="REVISIONESVEHICULO" Relationship="Self.FK_HISTORIALREVISIONES_REVISIONESVEHICULO" FromRole="HISTORIALREVISIONES" ToRole="REVISIONESVEHICULO" />
+          <NavigationProperty Name="REVISIONESVEHICULO" Relationship="AutoCar360Model.FK_HISTORIALREVISIONES_REVISIONESVEHICULO" FromRole="HISTORIALREVISIONES" ToRole="REVISIONESVEHICULO" />
         </EntityType>
         <EntityType Name="MANTENIMIENTOVEHICULO">
           <Key>
@@ -608,9 +608,9 @@
           </Key>
           <Property Name="Id_ProximaRevision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_RevisionesVehiculo" Type="Int32" />
-          <NavigationProperty Name="REVISIONESVEHICULO" Relationship="Self.FK_PROXIMASREVISIONES_REVISIONESVEHICULO" FromRole="PROXIMASREVISIONES" ToRole="REVISIONESVEHICULO" />
           <Property Name="ProximaRevision_intervaloKm" Type="Int32" />
           <Property Name="ProximaRevision_intervaloTiempo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="REVISIONESVEHICULO" Relationship="AutoCar360Model.FK_PROXIMASREVISIONES_REVISIONESVEHICULO" FromRole="PROXIMASREVISIONES" ToRole="REVISIONESVEHICULO" />
         </EntityType>
         <EntityType Name="PROXIMOMANTENIMIENTO">
           <Key>
@@ -620,20 +620,6 @@
           <Property Name="Id_MantenimientoVehiculo" Type="Int32" />
           <Property Name="ProximoMantenimiento_Km" Type="Int32" />
           <NavigationProperty Name="MANTENIMIENTOVEHICULO" Relationship="Self.FK_PROXIMOMANTENIMIENTO_MANTENIMIENTOVEHICULO" FromRole="PROXIMOMANTENIMIENTO" ToRole="MANTENIMIENTOVEHICULO" />
-        </EntityType>
-        <EntityType Name="REVISIONESVEHICULO">
-          <Key>
-            <PropertyRef Name="Id_RevisionesVehiculo" />
-          </Key>
-          <Property Name="Id_RevisionesVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_TipoRevision" Type="Int32" />
-          <Property Name="Id_Vehiculo" Type="Int32" />
-          <NavigationProperty Name="HISTORIALREVISIONES" Relationship="Self.FK_HISTORIALREVISIONES_REVISIONESVEHICULO" FromRole="REVISIONESVEHICULO" ToRole="HISTORIALREVISIONES" />
-          <NavigationProperty Name="PROXIMASREVISIONES" Relationship="Self.FK_PROXIMASREVISIONES_REVISIONESVEHICULO" FromRole="REVISIONESVEHICULO" ToRole="PROXIMASREVISIONES" />
-          <NavigationProperty Name="TIPOREVISIONES" Relationship="Self.FK_REVISIONESVEHICULO_TIPOREVISIONES" FromRole="REVISIONESVEHICULO" ToRole="TIPOREVISIONES" />
-          <NavigationProperty Name="VEHICULOS" Relationship="Self.FK_REVISIONESVEHICULO_VEHICULOS" FromRole="REVISIONESVEHICULO" ToRole="VEHICULOS" />
-          <Property Name="RevisionesVehiculo_Intervalokm" Type="Int32" />
-          <Property Name="RevisionesVehiculo_IntervaloTiempo" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -667,7 +653,7 @@
           </Key>
           <Property Name="Id_TipoRevision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Revision_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="REVISIONESVEHICULO" Relationship="Self.FK_REVISIONESVEHICULO_TIPOREVISIONES" FromRole="TIPOREVISIONES" ToRole="REVISIONESVEHICULO" />
+          <NavigationProperty Name="REVISIONESVEHICULO" Relationship="AutoCar360Model.FK_REVISIONESVEHICULO_TIPOREVISIONES" FromRole="TIPOREVISIONES" ToRole="REVISIONESVEHICULO" />
         </EntityType>
         <EntityType Name="TIPOVEHICULO">
           <Key>
@@ -703,9 +689,9 @@
           <NavigationProperty Name="COLORES" Relationship="Self.FK_VEHICULOS_COLORES" FromRole="VEHICULOS" ToRole="COLORES" />
           <NavigationProperty Name="MANTENIMIENTOVEHICULO" Relationship="Self.FK_MANTENIMIENTOVEHICULO_VEHICULOS" FromRole="VEHICULOS" ToRole="MANTENIMIENTOVEHICULO" />
           <NavigationProperty Name="MODELOS" Relationship="Self.FK_VEHICULOS_MODELOS" FromRole="VEHICULOS" ToRole="MODELOS" />
-          <NavigationProperty Name="REVISIONESVEHICULO" Relationship="Self.FK_REVISIONESVEHICULO_VEHICULOS" FromRole="VEHICULOS" ToRole="REVISIONESVEHICULO" />
           <NavigationProperty Name="USUARIOS" Relationship="Self.FK_VEHICULOS_USUARIOS" FromRole="VEHICULOS" ToRole="USUARIOS" />
           <NavigationProperty Name="USUARIOS1" Relationship="AutoCar360Model.FK_VEHICULOS_USUARIOS1" FromRole="VEHICULOS" ToRole="USUARIOS" />
+          <NavigationProperty Name="REVISIONESVEHICULO" Relationship="AutoCar360Model.FK_REVISIONESVEHICULO_VEHICULOS" FromRole="VEHICULOS" ToRole="REVISIONESVEHICULO" />
         </EntityType>
         <Association Name="FK_CARROCERIAS_TIPOVEHICULO">
           <End Role="TIPOVEHICULO" Type="Self.TIPOVEHICULO" Multiplicity="0..1" />
@@ -776,18 +762,6 @@
             </Principal>
             <Dependent Role="HISTORIALMANTENIMIENTO">
               <PropertyRef Name="Id_MantenimientoVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_HISTORIALREVISIONES_REVISIONESVEHICULO">
-          <End Role="REVISIONESVEHICULO" Type="Self.REVISIONESVEHICULO" Multiplicity="0..1" />
-          <End Role="HISTORIALREVISIONES" Type="Self.HISTORIALREVISIONES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="REVISIONESVEHICULO">
-              <PropertyRef Name="Id_RevisionesVehiculo" />
-            </Principal>
-            <Dependent Role="HISTORIALREVISIONES">
-              <PropertyRef Name="Id_RevisionesVehiculo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -863,42 +837,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PROXIMASREVISIONES_REVISIONESVEHICULO">
-          <End Role="REVISIONESVEHICULO" Type="Self.REVISIONESVEHICULO" Multiplicity="0..1" />
-          <End Role="PROXIMASREVISIONES" Type="Self.PROXIMASREVISIONES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="REVISIONESVEHICULO">
-              <PropertyRef Name="Id_RevisionesVehiculo" />
-            </Principal>
-            <Dependent Role="PROXIMASREVISIONES">
-              <PropertyRef Name="Id_RevisionesVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_REVISIONESVEHICULO_TIPOREVISIONES">
-          <End Role="TIPOREVISIONES" Type="Self.TIPOREVISIONES" Multiplicity="0..1" />
-          <End Role="REVISIONESVEHICULO" Type="Self.REVISIONESVEHICULO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPOREVISIONES">
-              <PropertyRef Name="Id_TipoRevision" />
-            </Principal>
-            <Dependent Role="REVISIONESVEHICULO">
-              <PropertyRef Name="Id_TipoRevision" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_REVISIONESVEHICULO_VEHICULOS">
-          <End Role="VEHICULOS" Type="Self.VEHICULOS" Multiplicity="0..1" />
-          <End Role="REVISIONESVEHICULO" Type="Self.REVISIONESVEHICULO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VEHICULOS">
-              <PropertyRef Name="Id_Vehiculo" />
-            </Principal>
-            <Dependent Role="REVISIONESVEHICULO">
-              <PropertyRef Name="Id_Vehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VEHICULOS_USUARIOS">
           <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="0..1" />
           <End Role="VEHICULOS" Type="Self.VEHICULOS" Multiplicity="*" />
@@ -923,7 +861,6 @@
           <EntitySet Name="MODELOS" EntityType="Self.MODELOS" />
           <EntitySet Name="PROXIMASREVISIONES" EntityType="Self.PROXIMASREVISIONES" />
           <EntitySet Name="PROXIMOMANTENIMIENTO" EntityType="Self.PROXIMOMANTENIMIENTO" />
-          <EntitySet Name="REVISIONESVEHICULO" EntityType="Self.REVISIONESVEHICULO" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TIPOCAMBIO" EntityType="Self.TIPOCAMBIO" />
           <EntitySet Name="TIPOMANTENIMIENTO" EntityType="Self.TIPOMANTENIMIENTO" />
@@ -955,10 +892,6 @@
             <End Role="MANTENIMIENTOVEHICULO" EntitySet="MANTENIMIENTOVEHICULO" />
             <End Role="HISTORIALMANTENIMIENTO" EntitySet="HISTORIALMANTENIMIENTO" />
           </AssociationSet>
-          <AssociationSet Name="FK_HISTORIALREVISIONES_REVISIONESVEHICULO" Association="Self.FK_HISTORIALREVISIONES_REVISIONESVEHICULO">
-            <End Role="REVISIONESVEHICULO" EntitySet="REVISIONESVEHICULO" />
-            <End Role="HISTORIALREVISIONES" EntitySet="HISTORIALREVISIONES" />
-          </AssociationSet>
           <AssociationSet Name="FK_MANTENIMIENTOVEHICULO_TIPOMANTENIMIENTO" Association="Self.FK_MANTENIMIENTOVEHICULO_TIPOMANTENIMIENTO">
             <End Role="TIPOMANTENIMIENTO" EntitySet="TIPOMANTENIMIENTO" />
             <End Role="MANTENIMIENTOVEHICULO" EntitySet="MANTENIMIENTOVEHICULO" />
@@ -982,18 +915,6 @@
           <AssociationSet Name="FK_VEHICULOS_MODELOS" Association="Self.FK_VEHICULOS_MODELOS">
             <End Role="MODELOS" EntitySet="MODELOS" />
             <End Role="VEHICULOS" EntitySet="VEHICULOS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PROXIMASREVISIONES_REVISIONESVEHICULO" Association="Self.FK_PROXIMASREVISIONES_REVISIONESVEHICULO">
-            <End Role="REVISIONESVEHICULO" EntitySet="REVISIONESVEHICULO" />
-            <End Role="PROXIMASREVISIONES" EntitySet="PROXIMASREVISIONES" />
-          </AssociationSet>
-          <AssociationSet Name="FK_REVISIONESVEHICULO_TIPOREVISIONES" Association="Self.FK_REVISIONESVEHICULO_TIPOREVISIONES">
-            <End Role="TIPOREVISIONES" EntitySet="TIPOREVISIONES" />
-            <End Role="REVISIONESVEHICULO" EntitySet="REVISIONESVEHICULO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_REVISIONESVEHICULO_VEHICULOS" Association="Self.FK_REVISIONESVEHICULO_VEHICULOS">
-            <End Role="VEHICULOS" EntitySet="VEHICULOS" />
-            <End Role="REVISIONESVEHICULO" EntitySet="REVISIONESVEHICULO" />
           </AssociationSet>
           <AssociationSet Name="FK_VEHICULOS_USUARIOS" Association="Self.FK_VEHICULOS_USUARIOS">
             <End Role="USUARIOS" EntitySet="USUARIOS" />
@@ -1033,7 +954,24 @@
             <End Role="USUARIOS" EntitySet="USUARIOS" />
             <End Role="VEHICULOS" EntitySet="VEHICULOS" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="REVISIONESVEHICULO" EntityType="AutoCar360Model.REVISIONESVEHICULO" />
+          <AssociationSet Name="FK_HISTORIALREVISIONES_REVISIONESVEHICULO" Association="AutoCar360Model.FK_HISTORIALREVISIONES_REVISIONESVEHICULO">
+            <End Role="REVISIONESVEHICULO" EntitySet="REVISIONESVEHICULO" />
+            <End Role="HISTORIALREVISIONES" EntitySet="HISTORIALREVISIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROXIMASREVISIONES_REVISIONESVEHICULO" Association="AutoCar360Model.FK_PROXIMASREVISIONES_REVISIONESVEHICULO">
+            <End Role="REVISIONESVEHICULO" EntitySet="REVISIONESVEHICULO" />
+            <End Role="PROXIMASREVISIONES" EntitySet="PROXIMASREVISIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REVISIONESVEHICULO_TIPOREVISIONES" Association="AutoCar360Model.FK_REVISIONESVEHICULO_TIPOREVISIONES">
+            <End Role="TIPOREVISIONES" EntitySet="TIPOREVISIONES" />
+            <End Role="REVISIONESVEHICULO" EntitySet="REVISIONESVEHICULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REVISIONESVEHICULO_VEHICULOS" Association="AutoCar360Model.FK_REVISIONESVEHICULO_VEHICULOS">
+            <End Role="VEHICULOS" EntitySet="VEHICULOS" />
+            <End Role="REVISIONESVEHICULO" EntitySet="REVISIONESVEHICULO" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -1057,7 +995,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="REVISIONESVEHICULO">
+          <Key>
+            <PropertyRef Name="Id_RevisionesVehiculo" />
+          </Key>
+          <Property Name="Id_RevisionesVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_TipoRevision" Type="Int32" />
+          <Property Name="Id_Vehiculo" Type="Int32" />
+          <Property Name="RevisionesVehiculo_Intervalokm" Type="Int32" />
+          <Property Name="RevisionesVehiculo_IntervaloTiempo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HISTORIALREVISIONES" Relationship="AutoCar360Model.FK_HISTORIALREVISIONES_REVISIONESVEHICULO" FromRole="REVISIONESVEHICULO" ToRole="HISTORIALREVISIONES" />
+          <NavigationProperty Name="PROXIMASREVISIONES" Relationship="AutoCar360Model.FK_PROXIMASREVISIONES_REVISIONESVEHICULO" FromRole="REVISIONESVEHICULO" ToRole="PROXIMASREVISIONES" />
+          <NavigationProperty Name="TIPOREVISIONES" Relationship="AutoCar360Model.FK_REVISIONESVEHICULO_TIPOREVISIONES" FromRole="REVISIONESVEHICULO" ToRole="TIPOREVISIONES" />
+          <NavigationProperty Name="VEHICULOS" Relationship="AutoCar360Model.FK_REVISIONESVEHICULO_VEHICULOS" FromRole="REVISIONESVEHICULO" ToRole="VEHICULOS" />
+        </EntityType>
+        <Association Name="FK_HISTORIALREVISIONES_REVISIONESVEHICULO">
+          <End Type="AutoCar360Model.REVISIONESVEHICULO" Role="REVISIONESVEHICULO" Multiplicity="0..1" />
+          <End Type="AutoCar360Model.HISTORIALREVISIONES" Role="HISTORIALREVISIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REVISIONESVEHICULO">
+              <PropertyRef Name="Id_RevisionesVehiculo" />
+            </Principal>
+            <Dependent Role="HISTORIALREVISIONES">
+              <PropertyRef Name="Id_RevisionesVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROXIMASREVISIONES_REVISIONESVEHICULO">
+          <End Type="AutoCar360Model.REVISIONESVEHICULO" Role="REVISIONESVEHICULO" Multiplicity="0..1" />
+          <End Type="AutoCar360Model.PROXIMASREVISIONES" Role="PROXIMASREVISIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REVISIONESVEHICULO">
+              <PropertyRef Name="Id_RevisionesVehiculo" />
+            </Principal>
+            <Dependent Role="PROXIMASREVISIONES">
+              <PropertyRef Name="Id_RevisionesVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REVISIONESVEHICULO_TIPOREVISIONES">
+          <End Type="AutoCar360Model.TIPOREVISIONES" Role="TIPOREVISIONES" Multiplicity="0..1" />
+          <End Type="AutoCar360Model.REVISIONESVEHICULO" Role="REVISIONESVEHICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOREVISIONES">
+              <PropertyRef Name="Id_TipoRevision" />
+            </Principal>
+            <Dependent Role="REVISIONESVEHICULO">
+              <PropertyRef Name="Id_TipoRevision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REVISIONESVEHICULO_VEHICULOS">
+          <End Type="AutoCar360Model.VEHICULOS" Role="VEHICULOS" Multiplicity="0..1" />
+          <End Type="AutoCar360Model.REVISIONESVEHICULO" Role="REVISIONESVEHICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VEHICULOS">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Principal>
+            <Dependent Role="REVISIONESVEHICULO">
+              <PropertyRef Name="Id_Vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1173,17 +1173,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="REVISIONESVEHICULO">
-            <EntityTypeMapping TypeName="AutoCar360Model.REVISIONESVEHICULO">
-              <MappingFragment StoreEntitySet="REVISIONESVEHICULO">
-                <ScalarProperty Name="RevisionesVehiculo_IntervaloTiempo" ColumnName="RevisionesVehiculo_IntervaloTiempo" />
-                <ScalarProperty Name="RevisionesVehiculo_Intervalokm" ColumnName="RevisionesVehiculo_Intervalokm" />
-                <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
-                <ScalarProperty Name="Id_TipoRevision" ColumnName="Id_TipoRevision" />
-                <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="AutoCar360Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1275,7 +1264,18 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="AutoCar360Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="AutoCar360Model.Store.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="REVISIONESVEHICULO">
+            <EntityTypeMapping TypeName="AutoCar360Model.REVISIONESVEHICULO">
+              <MappingFragment StoreEntitySet="REVISIONESVEHICULO">
+                <ScalarProperty Name="RevisionesVehiculo_IntervaloTiempo" ColumnName="RevisionesVehiculo_IntervaloTiempo" />
+                <ScalarProperty Name="RevisionesVehiculo_Intervalokm" ColumnName="RevisionesVehiculo_Intervalokm" />
+                <ScalarProperty Name="Id_Vehiculo" ColumnName="Id_Vehiculo" />
+                <ScalarProperty Name="Id_TipoRevision" ColumnName="Id_TipoRevision" />
+                <ScalarProperty Name="Id_RevisionesVehiculo" ColumnName="Id_RevisionesVehiculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -1290,7 +1290,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>

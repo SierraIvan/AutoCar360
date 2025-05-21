@@ -34,9 +34,9 @@ namespace AutoCar360.Controllers
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MANTENIMIENTOVEHICULO> MANTENIMIENTOVEHICULO { get; set; }
         public virtual MODELOS MODELOS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REVISIONESVEHICULO> REVISIONESVEHICULO { get; set; }
         public virtual USUARIOS USUARIOS { get; set; }
         public virtual USUARIOS USUARIOS1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REVISIONESVEHICULO> REVISIONESVEHICULO { get; set; }
     }
 }

@@ -1,52 +1,99 @@
 ﻿@model AutoCar360.Controllers.MANTENIMIENTOVEHICULO
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Mantenimiento";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<style>
+    body {
+        background-color: #132526;
+        color: #00e1ff;
+        font-family: Arial, sans-serif;
+    }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>MANTENIMIENTOVEHICULO</h4>
-        <hr />
+    h2 {
+        font-size: 28px;
+        color: #00e1ff;
+        margin-bottom: 40px;
+        margin-left: 80px;
+        text-align:center; 
+    }
+
+    .form-container {
+        margin-left: 80px;
+        max-width: 400px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #00e1ff;
+    }
+
+    .form-control {
+        background-color: #1e2d2f;
+        border: none;
+        color: #00e1ff;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .btn-crear {
+        background-color: #1e2d2f;
+        color: #00e1ff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .btn-back {
+        font-size: 24px;
+        color: #00e1ff;
+        text-decoration: none;
+        margin-left: 80px;
+        display: inline-block;
+        margin-top: 30px;
+    }
+
+        .btn-back:hover {
+            color: #ffffff;
+        }
+</style>
+
+<h2>Proximos Mantenimientos</h2>
+
+<div class="form-container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Id_Vehiculo, "Id_Vehiculo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Id_Vehiculo", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id_Vehiculo, "", new { @class = "text-danger" })
-            </div>
+            <label>Matrícula</label>
+            @Html.DropDownList("Id_Vehiculo", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Id_Vehiculo, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Id_TipoMantenimiento, "Id_TipoMantenimiento", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Id_TipoMantenimiento", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id_TipoMantenimiento, "", new { @class = "text-danger" })
-            </div>
+            <label>Tipo Mantenimiento</label>
+            @Html.DropDownList("Id_TipoMantenimiento", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Id_TipoMantenimiento, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MantenimientoVehiculo_IntervaloKm, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MantenimientoVehiculo_IntervaloKm, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MantenimientoVehiculo_IntervaloKm, "", new { @class = "text-danger" })
-            </div>
+            <label>Intervalo Km</label>
+            @Html.EditorFor(model => model.MantenimientoVehiculo_IntervaloKm, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MantenimientoVehiculo_IntervaloKm, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+        <button type="submit" class="btn-crear">Crear</button>
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index","PROXIMOMANTENIMIENTO")" class="btn-back">&#8592;</a>
 </div>

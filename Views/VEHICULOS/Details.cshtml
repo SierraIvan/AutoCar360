@@ -1,69 +1,87 @@
-﻿@model AutoCar360.Controllers.VEHICULOS
+﻿﻿@model AutoCar360.Controllers.VEHICULOS
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles de Vehículos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<style>
+    body {
+        background-color: #1c2c2c;
+        color: #00cfff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<div>
-    <h4>VEHICULOS</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    .detalles-container {
+        text-align: center;
+        color: cyan;
+        font-family: Arial, sans-serif;
+        padding: 40px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehiculo_Matricula)
-        </dt>
+        .detalles-container h2 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Vehiculo_Matricula)
-        </dd>
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        justify-items: center;
+        margin-bottom: 30px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehiculo_Fecha_Matriculacion)
-        </dt>
+    .info-box {
+        background-color: #13272f;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1.1em;
+        min-width: 150px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Vehiculo_Fecha_Matriculacion)
-        </dd>
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehiculo_Bastidor)
-        </dt>
+        .action-buttons a {
+            background-color: #13272f;
+            color: cyan;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Vehiculo_Bastidor)
-        </dd>
+            .action-buttons a:hover {
+                background-color: #0d1c21;
+            }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehiculo_KmActuales)
-        </dt>
+<div class="detalles-container">
+    <h2>DETALLES DE VEHICULOS</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Vehiculo_KmActuales)
-        </dd>
+    <div class="info-grid">
+        <div class="info-box">Marca: @Html.DisplayFor(model => model.MODELOS.MARCAS.Marca_Nombre)</div>
+        <div class="info-box">Modelo: @Html.DisplayFor(model => model.MODELOS.Modelo_Nombre)</div>
+        <div class="info-box">Color: @Html.DisplayFor(model => model.COLORES.Color_Nombre)</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.COLORES.Color_Nombre)
-        </dt>
+        <div class="info-box">Matricula: @Html.DisplayFor(model => model.Vehiculo_Matricula)</div>
+        <div class="info-box">
+            Fecha Matriculación: @(Model.Vehiculo_Fecha_Matriculacion?.ToString("dd/MM/yyyy"))
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.COLORES.Color_Nombre)
-        </dd>
+        <div class="info-box">Bastidor: @Html.DisplayFor(model => model.Vehiculo_Bastidor)</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MODELOS.Modelo_Nombre)
-        </dt>
+        <div class="info-box" style="grid-column: 2 / span 1;">Km: @Html.DisplayFor(model => model.Vehiculo_KmActuales)</div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MODELOS.Modelo_Nombre)
-        </dd>
-
-
-    </dl>
+    <div class="action-buttons">
+        @Html.ActionLink("Modificar", "Edit", new { id = Model.Id_Vehiculo })
+        @Html.ActionLink("Volver", "Index")
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Vehiculo }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

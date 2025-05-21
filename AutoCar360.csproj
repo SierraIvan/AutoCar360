@@ -180,6 +180,7 @@
     <Compile Include="Controllers\REVISIONESVEHICULO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\REVISIONESVEHICULOesController.cs" />
     <Compile Include="Controllers\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -215,7 +216,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\REVISIONESVEHICULO.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Models\VEHICULOS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -333,6 +333,11 @@
     <Content Include="Views\TIPOREVISIONES\Details.cshtml" />
     <Content Include="Views\TIPOREVISIONES\Edit.cshtml" />
     <Content Include="Views\TIPOREVISIONES\Index.cshtml" />
+    <Content Include="Views\REVISIONESVEHICULOes\Create.cshtml" />
+    <Content Include="Views\REVISIONESVEHICULOes\Delete.cshtml" />
+    <Content Include="Views\REVISIONESVEHICULOes\Details.cshtml" />
+    <Content Include="Views\REVISIONESVEHICULOes\Edit.cshtml" />
+    <Content Include="Views\REVISIONESVEHICULOes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

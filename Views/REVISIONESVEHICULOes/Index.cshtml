@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AutoCar360.Controllers.REVISIONESVEHICULO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RevisionesVehiculo_Intervalokm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RevisionesVehiculo_IntervaloTiempo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TIPOREVISIONES.Revision_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VEHICULOS.Vehiculo_Matricula)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RevisionesVehiculo_Intervalokm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RevisionesVehiculo_IntervaloTiempo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TIPOREVISIONES.Revision_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VEHICULOS.Vehiculo_Matricula)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_RevisionesVehiculo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_RevisionesVehiculo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_RevisionesVehiculo })
+        </td>
+    </tr>
+}
+
+</table>
