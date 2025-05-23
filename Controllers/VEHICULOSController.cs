@@ -202,15 +202,54 @@ namespace AutoCar360.Controllers
             return View(vehiculo);
         }
 
-        // POST: VEHICULOS/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            VEHICULOS vehiculo = db.VEHICULOS.Find(id);
-            db.VEHICULOS.Remove(vehiculo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var vehiculo = db.VEHICULOS
+                        .Include(v => v.MANTENIMIENTOVEHICULO.Select(m => m.PROXIMOMANTENIMIENTO))
+                        .Include(v => v.MANTENIMIENTOVEHICULO.Select(m => m.HISTORIALMANTENIMIENTO))
+                        .FirstOrDefault(v => v.Id_Vehiculo == id);
+
+                    if (vehiculo == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    foreach (var mantenimiento in vehiculo.MANTENIMIENTOVEHICULO.ToList())
+                    {
+                        if (mantenimiento.PROXIMOMANTENIMIENTO != null)
+                        {
+                            db.PROXIMOMANTENIMIENTO.RemoveRange(mantenimiento.PROXIMOMANTENIMIENTO);
+                        }
+
+                        if (mantenimiento.HISTORIALMANTENIMIENTO != null)
+                        {
+                            db.HISTORIALMANTENIMIENTO.RemoveRange(mantenimiento.HISTORIALMANTENIMIENTO);
+                        }
+                    }
+
+                    db.MANTENIMIENTOVEHICULO.RemoveRange(vehiculo.MANTENIMIENTOVEHICULO);
+
+                    db.VEHICULOS.Remove(vehiculo);
+
+                    db.SaveChanges();
+                    transaction.Commit();
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+
+
+                    ModelState.AddModelError("", $"No se pudo eliminar el vehículo. Error: {ex.InnerException?.Message ?? ex.Message}");
+                    return View("Delete", db.VEHICULOS.Find(id));
+                }
+            }
         }
 
         protected override void Dispose(bool disposing)

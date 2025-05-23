@@ -32,5 +32,6 @@ namespace AutoCar360.Controllers
         public virtual VEHICULOS VEHICULOS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROXIMOMANTENIMIENTO> PROXIMOMANTENIMIENTO { get; set; }
+        public int VehiculoId { get; internal set; }
     }
 }

@@ -11,8 +11,28 @@
         color: #00cfff;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    .cards{
+        width:100%;
+    }
 
-    .temp {
+    .card {
+        background-color: #2d3f3f;
+        text-decoration: none;
+        color: #00cfff;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        width: 65%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .containter-boton {
+        width: 65%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .boton {
         background-color: #2d3f3f;
         text-decoration: none;
         color: #00cfff;
@@ -30,27 +50,29 @@
 <body>
 
     <h2 class="text-center mt-4">PRÓXIMOS MANTENIMIENTOS</h2>
-
-    <div class="d-flex justify-content-between my-4">
-        <a href="@Url.Action("Index", "HISTORIALMANTENIMIENTO")" class="temp">Mostrar historial de mantenimientos</a>
-        <a href="@Url.Action("Create", "MANTENIMIENTOVEHICULO")" class="temp">Realizar mantenimiento</a>
-    </div>
-
-    @foreach (var item in Model)
-    {
-        <div class="temp">
-            <div class="mb-2">
-                <strong>Matrícula:</strong><p class="parrafo"> @item.MANTENIMIENTOVEHICULO.VEHICULOS.Vehiculo_Matricula </p>
-            </div>
-            <div class="mb-2">
-                <strong>Tipo de cambio:</strong> <p class="parrafo">@item.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO.Mantenimiento_Nombre </p>
-            </div>
-            <div class="mb-3">
-                <strong>Km a los que hacer el cambio:</strong> <p class="parrafo"> @item.ProximoMantenimiento_Km</p>
-            </div>
-            <div class="text-end">
-                @Html.ActionLink("Eliminar este próximo mantenimiento", "Delete", new { id = item.Id_ProximoMantenimiento }, new { @class = "btn btn-primary btn-sm " })
-            </div>
+    <div class="containter-boton">
+        <div class="d-flex justify-content-between my-4">
+            <a href="@Url.Action("Index", "HISTORIALMANTENIMIENTO")" class="boton">Mostrar historial de mantenimientos</a>
+            <a href="@Url.Action("Create", "MANTENIMIENTOVEHICULO")" class="boton">Realizar mantenimiento</a>
         </div>
-    }
+    </div>
+    <div class="cards">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="mb-2">
+                    <strong>Matrícula:</strong><p class="parrafo"> @item.MANTENIMIENTOVEHICULO.VEHICULOS.Vehiculo_Matricula </p>
+                </div>
+                <div class="mb-2">
+                    <strong>Tipo de cambio:</strong> <p class="parrafo">@item.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO.Mantenimiento_Nombre </p>
+                </div>
+                <div class="mb-3">
+                    <strong>Km a los que hacer el cambio:</strong> <p class="parrafo"> @item.ProximoMantenimiento_Km</p>
+                </div>
+                <div class="text-end">
+                    @Html.ActionLink("Eliminar este próximo mantenimiento", "Delete", new { id = item.Id_ProximoMantenimiento }, new { @class = "btn btn-primary btn-sm " })
+                </div>
+            </div>
+        }
+    </div>
 </body>
