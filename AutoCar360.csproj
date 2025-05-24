@@ -338,11 +338,19 @@
     <Content Include="Views\REVISIONESVEHICULOes\Details.cshtml" />
     <Content Include="Views\REVISIONESVEHICULOes\Edit.cshtml" />
     <Content Include="Views\REVISIONESVEHICULOes\Index.cshtml" />
+    <Content Include="Views\HISTORIALREVISIONES\Create.cshtml" />
+    <Content Include="Views\HISTORIALREVISIONES\Delete.cshtml" />
+    <Content Include="Views\HISTORIALREVISIONES\Details.cshtml" />
+    <Content Include="Views\HISTORIALREVISIONES\Edit.cshtml" />
+    <Content Include="Views\HISTORIALREVISIONES\Index.cshtml" />
+    <Content Include="Views\PROXIMASREVISIONES\Create.cshtml" />
+    <Content Include="Views\PROXIMASREVISIONES\Delete.cshtml" />
+    <Content Include="Views\PROXIMASREVISIONES\Details.cshtml" />
+    <Content Include="Views\PROXIMASREVISIONES\Edit.cshtml" />
+    <Content Include="Views\PROXIMASREVISIONES\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\HISTORIALREVISIONES\" />
-    <Folder Include="Views\PROXIMASREVISIONES\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -1,0 +1,67 @@
+﻿@model AutoCar360.Controllers.HISTORIALREVISIONES
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HISTORIALREVISIONES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HistorialRevisiones_Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistorialRevisiones_Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistorialRevisiones_Taller)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistorialRevisiones_Taller)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistorialRevisiones_Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistorialRevisiones_Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistorialRevisiones_km)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistorialRevisiones_km)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistorialRevisiones_Comentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistorialRevisiones_Comentarios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REVISIONESVEHICULO.Id_RevisionesVehiculo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REVISIONESVEHICULO.Id_RevisionesVehiculo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_HistorialRevisiones }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
