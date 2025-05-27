@@ -1,78 +1,146 @@
 ﻿@model AutoCar360.Controllers.HISTORIALMANTENIMIENTO
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Agregar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<style>
+    body {
+        background-color: #1b2b2c;
+        color: #00d6d6;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+    }
+
+    h2, h4 {
+        color: #00d6d6;
+        font-weight: bold;
+    }
+
+    .form-horizontal {
+        max-width: 400px;
+        margin-left: 15%;
+        margin-top: 30px;
+    }
+
+    .text {
+        text-align: left;
+        margin-left:5%;
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #00d6d6;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 8px;
+        background-color: #2f3e3f;
+        border: none;
+        color: #00d6d6;
+    }
+
+    .card-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 4%
+    }
+
+        .card-buttons a, .card-buttons input {
+            background-color: #132526;
+            color: #00e1ff;
+            text-decoration: none;
+            padding: 6px 12px;
+            text-align: center;
+            display: inline-block;
+            border: none;
+        }
+
+            .card-buttons a:hover, .card-buttons input:hover {
+                background-color: #00e1ff;
+                color: #132526;
+            }
+            
+
+    .visually-hidden {
+        display: none;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #00d6d6;
+    }
+</style>
+
+<h2>AGREGAR</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>HISTORIALMANTENIMIENTO</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id_HistorialMantenimiento)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id_MantenimientoVehiculo, "Id_MantenimientoVehiculo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Id_MantenimientoVehiculo", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id_MantenimientoVehiculo, "", new { @class = "text-danger" })
-            </div>
+        <div class="form-group visually-hidden">
+            @Html.LabelFor(model => model.Id_MantenimientoVehiculo)
+            @Html.DropDownList("Id_MantenimientoVehiculo", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Id_MantenimientoVehiculo, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group visually-hidden">
+            @Html.LabelFor(model => model.HistorialMantenimiento_Fecha)
+            @Html.EditorFor(model => model.HistorialMantenimiento_Fecha, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Fecha, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HistorialMantenimiento_Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HistorialMantenimiento_Fecha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Fecha, "", new { @class = "text-danger" })
-            </div>
+            <p class="text">Taller</p>
+            @Html.EditorFor(model => model.HistorialMantenimiento_Taller, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Taller, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HistorialMantenimiento_Taller, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HistorialMantenimiento_Taller, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Taller, "", new { @class = "text-danger" })
-            </div>
+            <p class="text">Precio</p>
+            @Html.EditorFor(model => model.HistorialMantenimiento_Precio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Precio, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group visually-hidden">
+            @Html.LabelFor(model => model.HistorialMantenimiento_Km)
+            @Html.EditorFor(model => model.HistorialMantenimiento_Km, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Km, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HistorialMantenimiento_Precio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HistorialMantenimiento_Precio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Precio, "", new { @class = "text-danger" })
-            </div>
+            <p class="text">Comentario</p>
+            @Html.EditorFor(model => model.HistorialMantenimiento_Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Comentarios, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HistorialMantenimiento_Km, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HistorialMantenimiento_Km, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Km, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <div class="card-buttons">
+            <input type="submit" value="Agregar" class="btn" />
+            <a href="@Url.Action("Index")" class="btn">Volver</a>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HistorialMantenimiento_Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HistorialMantenimiento_Comentarios, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HistorialMantenimiento_Comentarios, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

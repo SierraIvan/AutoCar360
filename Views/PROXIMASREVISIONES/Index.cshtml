@@ -1,46 +1,84 @@
 ﻿@model IEnumerable<AutoCar360.Controllers.PROXIMASREVISIONES>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Próximas Revisiones";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
+    body {
+        background-color: #1c2c2c;
+        color: #00cfff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<p>
-    <a href="@Url.Action("Create", "REVISIONESVEHICULOes")" class="">Realizar mantenimiento</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProximaRevision_intervaloKm)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProximaRevision_intervaloTiempo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.REVISIONESVEHICULO.Id_RevisionesVehiculo)
-        </th>
-        <th></th>
-    </tr>
+    .cards {
+        width: 100%;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProximaRevision_intervaloKm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProximaRevision_intervaloTiempo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.REVISIONESVEHICULO.Id_RevisionesVehiculo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_ProximaRevision }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_ProximaRevision }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_ProximaRevision })
-        </td>
-    </tr>
-}
+    .card {
+        background-color: #2d3f3f;
+        text-decoration: none;
+        color: #00cfff;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        width: 65%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-</table>
+    .containter-boton {
+        width: 65%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .boton {
+        background-color: #2d3f3f;
+        text-decoration: none;
+        color: #00cfff;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .parrafo {
+        display: contents;
+        font-style: italic;
+    }
+</style>
+
+<body>
+
+    <h2 class="text-center mt-4">PRÓXIMAS REVISIONES</h2>
+    <div class="containter-boton">
+        <div class="d-flex justify-content-between my-4">
+            <a href="@Url.Action("Index", "HISTORIALREVISIONES")" class="boton">Mostrar historial de revisiones</a>
+            <a href="@Url.Action("Create", "REVISIONESVEHICULOes")" class="boton">Realizar revision</a>
+        </div>
+    </div>
+    <div class="cards">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="mb-2">
+                    <strong>Matrícula:</strong><p class="parrafo"> @item.REVISIONESVEHICULO.VEHICULOS.Vehiculo_Matricula </p>
+                </div>
+                <div class="mb-2">
+                    <strong>Revisión por:</strong> <p class="parrafo">@item.REVISIONESVEHICULO.TIPOREVISIONES.Revision_Nombre </p>
+                </div>
+                <div class="mb-2">
+                    
+                    <strong>Cuando hacer el cambio:</strong> <p class="parrafo">@(( (DateTime)item.ProximaRevision_intervaloTiempo).ToString("yyyy-MM-dd"))</p>
+                </div>
+                <div class="mb-3">
+                    <strong>Km a los que hacer el cambio:</strong> <p class="parrafo"> @item.ProximaRevision_intervaloKm</p>
+                </div>
+                <div class="text-end">
+                    @Html.ActionLink("Eliminar esta proxima revisión", "Delete", new { id = item.Id_ProximaRevision }, new { @class = "boton" })
+                </div>
+            </div>
+        }
+    </div>
+</body>

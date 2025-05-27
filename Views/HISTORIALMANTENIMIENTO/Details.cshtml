@@ -1,67 +1,117 @@
 ﻿@model AutoCar360.Controllers.HISTORIALMANTENIMIENTO
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<style>
+    body {
+        background-color: #152b2d;
+        color: #00cfff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
 
-<div>
-    <h4>HISTORIALMANTENIMIENTO</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Fecha)
-        </dt>
+    .detalles-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 30px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialMantenimiento_Fecha)
-        </dd>
+    .detalles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 200px);
+        gap: 20px 40px;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Taller)
-        </dt>
+    .detalles-item {
+        background-color: #1e3a3d;
+        padding: 10px;
+        border-radius: 5px;
+        color: #00cfff;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialMantenimiento_Taller)
-        </dd>
+    .detalle-botones {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Precio)
-        </dt>
+    .boton {
+        background-color: #1e3a3d;
+        padding: 8px 20px;
+        border: none;
+        color: #00cfff;
+        border-radius: 5px;
+        text-decoration: none;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialMantenimiento_Precio)
-        </dd>
+        .boton:hover {
+            background-color: #00cfff;
+            color: #1e3a3d;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Km)
-        </dt>
+    h2 {
+        color: #00cfff;
+        margin-top: 20px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialMantenimiento_Km)
-        </dd>
+ 
+    @@media (max-width: 768px) {
+        .detalles-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 300px;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialMantenimiento_Comentarios)
-        </dt>
+        .detalle-botones {
+            flex-direction: column;
+            gap: 15px;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialMantenimiento_Comentarios)
-        </dd>
+        .detalles-item {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MANTENIMIENTOVEHICULO.Id_MantenimientoVehiculo)
-        </dt>
+    @@media (max-width: 480px) {
+        .detalles-container {
+            margin-top: 15px;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.MANTENIMIENTOVEHICULO.Id_MantenimientoVehiculo)
-        </dd>
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
 
-    </dl>
+<h2>DETALLES</h2>
+
+<div class="detalles-container">
+    <div class="detalles-grid">
+        <div class="detalles-item"><p>Matricula</p>@Model.MANTENIMIENTOVEHICULO.Id_MantenimientoVehiculo</div>
+        <div class="detalles-item"><p>Fecha</p>@Model.HistorialMantenimiento_Fecha.ToString("yyyy-MM-dd")</div>
+        <div class="detalles-item"><p>Mantenimiento</p>@Model.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO.Mantenimiento_Nombre</div>
+
+        <div class="detalles-item"><p>Taller</p>@Model.HistorialMantenimiento_Taller</div>
+        <div class="detalles-item"><p>Precio</p>@Model.HistorialMantenimiento_Precio</div>
+        <div class="detalles-item"><p>Km</p>@Model.HistorialMantenimiento_Km</div>
+    </div>
+
+    <div class="detalles-item" style="width: 300px; max-width:90%">
+        <p>Comentario</p>
+        @Model.HistorialMantenimiento_Comentarios
+    </div>
+
+    <div class="detalle-botones">
+        @Html.ActionLink("Modificar", "Edit", new { id = Model.Id_HistorialMantenimiento }, new { @class = "boton" })
+        @Html.ActionLink("Volver", "Index", null, new { @class = "boton" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_HistorialMantenimiento }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
