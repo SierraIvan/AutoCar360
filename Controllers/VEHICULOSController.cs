@@ -235,6 +235,32 @@ namespace AutoCar360.Controllers
 
                     db.MANTENIMIENTOVEHICULO.RemoveRange(vehiculo.MANTENIMIENTOVEHICULO);
 
+
+                    var vehiculorev = db.VEHICULOS
+                       .Include(v => v.REVISIONESVEHICULO.Select(m => m.PROXIMASREVISIONES))
+                       .Include(v => v.REVISIONESVEHICULO.Select(m => m.HISTORIALREVISIONES))
+                       .FirstOrDefault(v => v.Id_Vehiculo == id);
+
+                    if (vehiculorev == null)    
+                    {
+                        return HttpNotFound();
+                    }
+
+                    foreach (var REVISIONES in vehiculorev.REVISIONESVEHICULO.ToList())
+                    {
+                        if (REVISIONES.PROXIMASREVISIONES != null)
+                        {
+                            db.PROXIMASREVISIONES.RemoveRange(REVISIONES.PROXIMASREVISIONES);
+                        }
+
+                        if (REVISIONES.HISTORIALREVISIONES != null)
+                        {
+                            db.HISTORIALREVISIONES.RemoveRange(REVISIONES.HISTORIALREVISIONES);
+                        }
+                    }
+
+                    db.REVISIONESVEHICULO.RemoveRange(vehiculo.REVISIONESVEHICULO);
+
                     db.VEHICULOS.Remove(vehiculo);
 
                     db.SaveChanges();

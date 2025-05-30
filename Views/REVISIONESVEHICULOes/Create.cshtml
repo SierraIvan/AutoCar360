@@ -4,8 +4,74 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    body {
+        background-color: #1c2c2c;
+        color: #00cfff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<h2>Create</h2>
+    h2 {
+        font-size: 28px;
+        color: #00e1ff;
+        margin-bottom: 40px;
+        margin-left: 80px;
+        text-align: center;
+    }
+
+    .form-container {
+        margin-left: 80px;
+        max-width: 400px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        background-color: #1e3a3d;
+        border: none;
+        color: #00e1ff;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .btn-crear {
+        background-color: #1e3a3d;
+        color: #00e1ff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 15%
+    }
+
+        .btn-crear:hover {
+            background-color: #00e1ff;
+            color: #132526;
+            border;
+            border-radius: 15%
+        }
+
+    .btn-back {
+        font-size: 24px;
+        color: #00e1ff;
+        text-decoration: none;
+        margin-left: 80px;
+        display: inline-block;
+        margin-top: 30px;
+    }
+
+        .btn-back:hover {
+            color: #ffffff;
+        }
+</style>
+<h2>CREAR REVISION</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -15,45 +81,34 @@
     <h4>REVISIONESVEHICULO</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Id_TipoRevision, "Id_TipoRevision", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Id_TipoRevision", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Id_TipoRevision, "", new { @class = "text-danger" })
-        </div>
-    </div>
+
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Id_Vehiculo, "Id_Vehiculo", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Id_Vehiculo", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Id_Vehiculo, "", new { @class = "text-danger" })
+        <label>Matrícula</label>
+        @Html.DropDownList("Id_Vehiculo", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Id_Vehiculo, "", new { @class = "text-danger" })
         </div>
-    </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.RevisionesVehiculo_Intervalokm, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <label>Tipo Mantenimiento</label>
+        @Html.DropDownList("Id_TipoRevision", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Id_TipoRevision, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label>Intervalo en km</label>
             @Html.EditorFor(model => model.RevisionesVehiculo_Intervalokm, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.RevisionesVehiculo_Intervalokm, "", new { @class = "text-danger" })
-        </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.RevisionesVehiculo_IntervaloTiempo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <label>Fecha de proxima revision</label>
             @Html.TextBoxFor(model => model.RevisionesVehiculo_IntervaloTiempo, new { @class = "form-control", type = "date" })
             @Html.ValidationMessageFor(model => model.RevisionesVehiculo_IntervaloTiempo, "", new { @class = "text-danger" })
-        </div>
+
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
+    <button type="submit" class="btn-crear">Crear</button>
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<a href="@Url.Action("Index","PROXIMASREVISIONES")" class="btn-back">&#8592;</a>
+    

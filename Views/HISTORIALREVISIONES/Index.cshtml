@@ -5,60 +5,90 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
+    body {
+        background-color: #1c2c2c;
+        color: #00cfff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_Taller)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_km)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_Comentarios)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.REVISIONESVEHICULO.Id_RevisionesVehiculo)
-        </th>
-        <th></th>
-    </tr>
+    h2 {
+        text-align: center;
+        color: #00e1ff;
+        margin-bottom: 30px;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialRevisiones_Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialRevisiones_Taller)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialRevisiones_Precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialRevisiones_km)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistorialRevisiones_Comentarios)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.REVISIONESVEHICULO.Id_RevisionesVehiculo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_HistorialRevisiones }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_HistorialRevisiones }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_HistorialRevisiones })
-        </td>
-    </tr>
-}
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
 
-</table>
+    .card {
+        background-color: #1e2d2f;
+        padding: 17px;
+        margin: 20px 80px;
+        border-radius: 5px;
+        justify-content: space-between;
+        align-items: flex-start;
+        display: inline-flex;
+        width: 400px;
+    }
+
+    .card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+        .card-info label {
+            font-weight: bold;
+            color: #00e1ff;
+        }
+
+    .card-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 4%
+    }
+
+        .card-buttons a {
+            background-color: #132526;
+            color: #00e1ff;
+            text-decoration: none;
+            padding: 6px 12px;
+            text-align: center;
+            display: inline-block;
+            border: none;
+        }
+
+            .card-buttons a:hover {
+                background-color: #00e1ff;
+                color: #132526;
+            }
+
+    .parrafo {
+        display: contents;
+        font-style: italic;
+        color: #00e1ff;
+    }
+</style>
+
+<h2>Historial Mantenimiento</h2>    
+<div class="cards-container">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-info">
+                <div><label>Matrícula:</label><p class="parrafo"> @item.REVISIONESVEHICULO.VEHICULOS.Vehiculo_Matricula </p></div>
+                <div><label>Fecha:</label><p class="parrafo"> @(( (DateTime)item.HistorialRevisiones_Fecha ).ToString("yyyy-MM-dd")) </p></div>
+                <div><label>Tipo de cambio:</label> <p class="parrafo"> @item.REVISIONESVEHICULO.TIPOREVISIONES.Revision_Nombre </p></div>
+            </div>
+            <div class="card-buttons">
+                <a href="@Url.Action("Edit", new { id = item.Id_HistorialRevisiones })">Editar</a>
+                <a href="@Url.Action("Details", new { id = item.Id_HistorialRevisiones })">Mostrar Datos</a>
+            </div>
+        </div>
+    }
+</div>
