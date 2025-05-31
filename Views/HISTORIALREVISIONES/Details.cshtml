@@ -4,64 +4,118 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    body {
+        background-color: #152b2d;
+        color: #00cfff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
 
+    .detalles-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .detalles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 200px);
+        gap: 20px 40px;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .detalles-item {
+        background-color: #1e3a3d;
+        padding: 10px;
+        border-radius: 5px;
+        color: #00cfff;
+    }
+
+    .detalle-botones {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .boton {
+        background-color: #1e3a3d;
+        padding: 8px 20px;
+        border: none;
+        color: #00cfff;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+        .boton:hover {
+            background-color: #00cfff;
+            color: #1e3a3d;
+        }
+
+    h2 {
+        color: #00cfff;
+        margin-top: 20px;
+    }
+
+
+    @@media (max-width: 768px) {
+        .detalles-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 300px;
+        }
+
+        .detalle-botones {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .detalles-item {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .detalles-container {
+            margin-top: 15px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
 <h2>Details</h2>
 
-<div>
-    <h4>HISTORIALREVISIONES</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_Fecha)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialRevisiones_Fecha)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_Taller)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialRevisiones_Taller)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_Precio)
-        </dt>
+<div class="detalles-container">
+    <div class="detalles-grid">
+        <div class="detalles-item"><p>Matricula</p>@Model.REVISIONESVEHICULO.Id_RevisionesVehiculo</div>
+        <div class="detalles-item"><p>Fecha</p>@Model.HistorialRevisiones_Fecha.ToString("yyyy-MM-dd")</div>
+        <div class="detalles-item"><p>Mantenimiento</p>@Model.REVISIONESVEHICULO.TIPOREVISIONES.Revision_Nombre</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialRevisiones_Precio)
-        </dd>
+        <div class="detalles-item"><p>Taller</p>@Model.HistorialRevisiones_Taller</div>
+        <div class="detalles-item"><p>Precio</p>@Model.HistorialRevisiones_Precio</div>
+        <div class="detalles-item"><p>Km</p>@Model.HistorialRevisiones_km</div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_km)
-        </dt>
+    <div class="detalles-item" style="width: 300px; max-width:90%">
+        <p>Comentario</p>
+        @Model.HistorialRevisiones_Comentarios
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.HistorialRevisiones_km)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HistorialRevisiones_Comentarios)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HistorialRevisiones_Comentarios)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.REVISIONESVEHICULO.Id_RevisionesVehiculo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.REVISIONESVEHICULO.Id_RevisionesVehiculo)
-        </dd>
-
-    </dl>
+    <div class="detalle-botones">
+        @Html.ActionLink("Modificar", "Edit", new { id = Model.Id_HistorialRevisiones }, new { @class = "boton" })
+        @Html.ActionLink("Volver", "Index", null, new { @class = "boton" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_HistorialRevisiones }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

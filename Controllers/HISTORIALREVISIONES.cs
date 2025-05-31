@@ -16,7 +16,7 @@ namespace AutoCar360.Controllers
     {
         public int Id_HistorialRevisiones { get; set; }
         public Nullable<int> Id_RevisionesVehiculo { get; set; }
-        public Nullable<System.DateTime> HistorialRevisiones_Fecha { get; set; }
+        public System.DateTime HistorialRevisiones_Fecha { get; set; }
         public string HistorialRevisiones_Taller { get; set; }
         public Nullable<double> HistorialRevisiones_Precio { get; set; }
         public Nullable<int> HistorialRevisiones_km { get; set; }
