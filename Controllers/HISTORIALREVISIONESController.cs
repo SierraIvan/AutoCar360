@@ -16,8 +16,21 @@ namespace AutoCar360.Controllers
         // GET: HISTORIALREVISIONES
         public ActionResult Index()
         {
-            var hISTORIALREVISIONES = db.HISTORIALREVISIONES.Include(h => h.REVISIONESVEHICULO);
-            return View(hISTORIALREVISIONES.ToList());
+
+            if (Session["UsuarioId"] == null)
+            {
+                return RedirectToAction("Index", "USUARIOS");
+            }
+
+            int usuarioId = (int)Session["UsuarioId"];
+
+            var hISTORIALREVISIONES = db.HISTORIALREVISIONES
+                .Include(h => h.REVISIONESVEHICULO)
+                .Include(p => p.REVISIONESVEHICULO.VEHICULOS)
+                .Include(p => p.REVISIONESVEHICULO.TIPOREVISIONES)
+                .Where(p => p.REVISIONESVEHICULO.VEHICULOS.Id_Usuario == usuarioId)
+                .ToList(); ;
+            return View(hISTORIALREVISIONES);
         }
 
         // GET: HISTORIALREVISIONES/Details/5

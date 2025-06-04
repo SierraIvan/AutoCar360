@@ -24,14 +24,42 @@
                     <li>@Html.ActionLink("MANTENIMIENTOS", "Index", "PROXIMOMANTENIMIENTO", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("REVISIONES", "Index", "PROXIMASREVISIONES", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
+                <img src="~/Imagenes/logo360.png" alt="AutoCar360 Logo" class="img-fluid" style="height: 60px; width: 80px">
             </div>
         </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Ivan Sierra Perez</p>
+        <footer class="custom-footer">
+            <div class="container">
+                <div class="row">
+                    <!-- Columna 1: Contacto -->
+                    <div class="col-md-4 footer-column">
+                        <h4>Contacto</h4>
+                        <ul>
+                            <li></i> ivan.sierra.perez@colegiolitterator.com</li>
+                            <li> +34 123 456 789</li>
+                            <li>C. Patrimonio Mundial, 5, 28300 Pau, Madrid</li>
+                        </ul>
+                    </div>
+
+                    <!-- Columna 2: Términos y Condiciones -->
+                    <div class="col-md-4 footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li>@Html.ActionLink("Términos y Condiciones", "Index", "TERMINOS", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Política de Privacidad", "Index", "TERMINOS", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Aviso Legal", "Index", "TERMINOS", new { area = "" }, new { @class = "nav-link" })</li>
+                        </ul>
+                    </div>
+
+                  
+                </div>
+                <div class="copyright">
+                    &copy; @DateTime.Now.Year - AutoCar360 | Iván Sierra Pérez
+                </div>
+            </div>
         </footer>
     </div>
 

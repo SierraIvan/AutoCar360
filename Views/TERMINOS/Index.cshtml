@@ -1,0 +1,84 @@
+﻿@model IEnumerable<AutoCar360.Controllers.TERMINOSController>
+
+@{
+    ViewBag.Title = "Lista de Terminos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #1c2c2c;
+        color: #00cfff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+</style>
+
+<div class="text-start mt-4">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+        <i class="fas fa-home"></i> Volver al Inicio
+    </a>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3><i class="fas fa-file-contract me-2"></i>Información Legal</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Términos y Condiciones -->
+                    <div class="mb-5">
+                        <h4 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-gavel me-2"></i>Términos y Condiciones
+                        </h4>
+                        <p>
+                            Bienvenido a AutoCar360, su gestor de vehículos integral. Al utilizar nuestros servicios, usted acepta cumplir con estos términos y condiciones. El acceso y uso de la plataforma está destinado exclusivamente para gestión de inventario vehicular, reservas y transacciones relacionadas con automóviles.
+                        </p>
+                        <p>
+                            Queda prohibido el uso indebido de la información contenida en el sistema. AutoCar360 se reserva el derecho de suspender cuentas que violen estos términos. Todos los datos de vehículos deben ser veraces y actualizados periódicamente por los usuarios registrados.
+                        </p>
+                    </div>
+
+                    <!-- Política de Privacidad -->
+                    <div class="mb-5">
+                        <h4 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-user-shield me-2"></i>Política de Privacidad
+                        </h4>
+                        <p>
+                            En AutoCar360 protegemos sus datos con los más altos estándares de seguridad. La información sobre vehículos, clientes y transacciones se almacena de forma cifrada. Solo personal autorizado tiene acceso a datos sensibles para el correcto funcionamiento del servicio.
+                        </p>
+                        <p>
+                            Recopilamos información necesaria para la gestión vehicular (especificaciones técnicas, historial de mantenimiento, datos de propietarios). Estos datos no serán compartidos con terceros sin consentimiento expreso, excepto por requerimiento legal.
+                        </p>
+                    </div>
+
+                    <!-- Aviso Legal -->
+                    <div class="mb-3">
+                        <h4 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-balance-scale me-2"></i>Aviso Legal
+                        </h4>
+                        <p>
+                            AutoCar360 es un sistema de gestión vehicular propiedad de [Nombre de la Empresa], inscrita en el Registro Mercantil de [Ciudad] con NIF [Número]. La plataforma tiene carácter informativo y de gestión, no siendo responsable por errores en datos proporcionados por los usuarios.
+                        </p>
+                        <p>
+                            El contenido sobre especificaciones técnicas de vehículos se obtiene de fuentes oficiales y fabricantes. Se recomienda verificar siempre la información directamente con las autoridades vehiculares competentes antes de realizar transacciones importantes.
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer text-muted small">
+                    <i class="fas fa-info-circle me-1"></i> Última actualización: @DateTime.Now.ToString("dd/MM/yyyy")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-start mt-4">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+        <i class="fas fa-home"></i> Volver al Inicio
+    </a>
+</div>
+
+

@@ -4,42 +4,44 @@
     ViewBag.Title = "Tus Vehículos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body>
 
-<div class="vehiculos-container">
-    <div class="top-bar">
-        <h2>Tus Vehículos</h2>
-        <a href="@Url.Action("Create")" class="btn-add">Añadir</a>
+    <div class="vehiculos-container">
+        <div class="top-bar">
+            <h2>Tus Vehículos</h2>
+            <a href="@Url.Action("Create")" class="boton-add">Añadir</a>
+        </div>
+
+        <div class="vehiculo-lista">
+            @foreach (var item in Model)
+            {
+                <div class="vehiculo-card">
+                    <div class="vehiculo-info">
+                        <div><strong>Matrícula:</strong> @item.Vehiculo_Matricula</div>
+                        <div><strong>Km actuales:</strong> @item.Vehiculo_KmActuales</div>
+                        <div><strong>Modelo:</strong> @item.MODELOS.Modelo_Nombre</div>
+                    </div>
+                    <div class="vehiculo-acciones">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id_Vehiculo }, new { @class = "boton-card" })
+                        @Html.ActionLink("Detalles", "Details", new { id = item.Id_Vehiculo }, new { @class = "boton-card" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Vehiculo }, new { @class = "boton-card" })
+                    </div>
+                </div>
+            }
+        </div>
     </div>
-
-    <div class="vehiculo-lista">
-        @foreach (var item in Model)
-        {
-            <div class="vehiculo-card">
-                <div class="vehiculo-icono">
-                    <div class="icono">icono</div>
-                </div>
-                <div class="vehiculo-info">
-                    <div><strong>Matrícula:</strong> @item.Vehiculo_Matricula</div>
-                    <div><strong>Km actuales:</strong> @item.Vehiculo_KmActuales</div>
-                    <div><strong>Modelo:</strong> @item.MODELOS.Modelo_Nombre</div>
-                </div>
-                <div class="vehiculo-acciones">
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id_Vehiculo }, new { @class = "btn-accion" })
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_Vehiculo }, new { @class = "btn-accion" })
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Vehiculo }, new { @class = "btn-accion" })
-                </div>
-            </div>
-        }
-    </div>
-</div>
-
+</body>
 <style>
     body {
-        background-color: #0a3a4a;
-        color: #000;
+        background-color: #1c2c2c;
+        color: #00cfff;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
+    h2 {
+        color: #00cfff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: bold;
+    }
     .vehiculos-container {
         padding: 20px;
         max-width: 1000px;
@@ -53,17 +55,17 @@
         margin-bottom: 20px;
     }
 
-        .top-bar h2 {
-            color: #fff;
-        }
-
-    .btn-add {
-        background-color: #f0f0f0;
+    .boton-add {
+        background-color: #2d3f3f;
         padding: 8px 16px;
         text-decoration: none;
-        font-weight: bold;
-        border-radius: 4px;
+        color: #00cfff;
+        margin-bottom: 10px;
+        border-radius: 5px;
     }
+        .boton-add:hover {
+            font-weight: bold;
+        }
 
     .vehiculo-lista {
         display: flex;
@@ -72,7 +74,7 @@
     }
 
     .vehiculo-card {
-        background-color: #eee;
+        background-color: #2d3f3f;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -100,15 +102,14 @@
         gap: 10px;
     }
 
-    .btn-accion {
-        background-color: transparent;
-        border: none;
-        color: black;
-        text-decoration: underline;
-        cursor: pointer;
+    .boton-card {
+        background-color: #2d3f3f;
+        text-decoration: none;
+        color: #00cfff;
+        border-radius: 5px;
     }
 
-        .btn-accion:hover {
+        .boton-card:hover {
             font-weight: bold;
         }
 </style>

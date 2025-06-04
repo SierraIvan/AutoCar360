@@ -16,8 +16,20 @@ namespace AutoCar360.Controllers
         // GET: PROXIMASREVISIONES
         public ActionResult Index()
         {
-            var pROXIMASREVISIONES = db.PROXIMASREVISIONES.Include(p => p.REVISIONESVEHICULO);
-            return View(pROXIMASREVISIONES.ToList());
+
+            if (Session["UsuarioId"] == null)
+            {
+                return RedirectToAction("Index", "USUARIOS");
+            }
+
+            int usuarioId = (int)Session["UsuarioId"];
+
+            var pROXIMASREVISIONES = db.PROXIMASREVISIONES.Include(p => p.REVISIONESVEHICULO)
+                .Include(p => p.REVISIONESVEHICULO.VEHICULOS)
+                .Include(p => p.REVISIONESVEHICULO.TIPOREVISIONES)
+                .Where(p => p.REVISIONESVEHICULO.VEHICULOS.Id_Usuario == usuarioId)
+                .ToList();
+            return View(pROXIMASREVISIONES);
         }
 
         // GET: PROXIMASREVISIONES/Details/5

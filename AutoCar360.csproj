@@ -190,6 +190,7 @@
     <Compile Include="Controllers\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\TERMINOSController.cs" />
     <Compile Include="Controllers\TIPOCAMBIO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -348,6 +349,7 @@
     <Content Include="Views\PROXIMASREVISIONES\Details.cshtml" />
     <Content Include="Views\PROXIMASREVISIONES\Edit.cshtml" />
     <Content Include="Views\PROXIMASREVISIONES\Index.cshtml" />
+    <Content Include="Views\TERMINOS\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
