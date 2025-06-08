@@ -3,8 +3,35 @@
 @{
     ViewBag.Title = "Tus Vehículos";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Random rnd = new Random();
+    int numero1 = rnd.Next(1, 5);
+    int numero2;
+    do
+    {
+        numero2 = rnd.Next(1, 5);
+    } while (numero2 == numero1);
+
+    string ObtenerRutaImagen(int num)
+    {
+        switch (num)
+        {
+            case 1: return Url.Content("~/Imagenes/bateria.jpg");
+            case 2: return Url.Content("~/Imagenes/ruedas.jpg");
+            case 3: return Url.Content("~/Imagenes/revision_ITV.jpg");
+            case 4: return Url.Content("~/Imagenes/aceites_de_motor.jpg");
+            default: return Url.Content("~/Imagenes/Logo360.png");
+        }
+    }
+
+    string rutaImagen1 = ObtenerRutaImagen(numero1);
+    string rutaImagen2 = ObtenerRutaImagen(numero2);
 }
+
+
 <body>
+    <div class="imagen-lateral izquierda">
+        <img src="@rutaImagen1" alt="Consejo de mantenimiento">
+    </div>
 
     <div class="vehiculos-container">
         <div class="top-bar">
@@ -16,6 +43,28 @@
             @foreach (var item in Model)
             {
                 <div class="vehiculo-card">
+                    <div>
+                        @if (item.MODELOS.CARROCERIAS.TIPOVEHICULO.TipoVehiculo_Nombre == "Coche")
+                        {
+                            <img src="~/imagenes/coche.png" alt="Coche" style="width:40px" />
+                        }
+                        else if (item.MODELOS.CARROCERIAS.TIPOVEHICULO.TipoVehiculo_Nombre == "Moto")
+                        {
+                            <img src="~/imagenes/moto.png" alt="Moto" style="width:40px" />
+                        }
+                        else if (item.MODELOS.CARROCERIAS.TIPOVEHICULO.TipoVehiculo_Nombre == "Camion")
+                        {
+                            <img src="~/imagenes/Camion.png" alt="Camion" style="width:40px" />
+                        }
+                        else if (item.MODELOS.CARROCERIAS.TIPOVEHICULO.TipoVehiculo_Nombre == "Furgoneta")
+                        {
+                            <img src="~/imagenes/Furgoneta.png" alt="Furgoneta" style="width:40px" />
+                        }
+                        else
+                        {
+                            <span>@item.MODELOS.CARROCERIAS.TIPOVEHICULO.TipoVehiculo_Nombre</span>
+                        }
+                    </div>
                     <div class="vehiculo-info">
                         <div><strong>Matrícula:</strong> @item.Vehiculo_Matricula</div>
                         <div><strong>Km actuales:</strong> @item.Vehiculo_KmActuales</div>
@@ -30,22 +79,63 @@
             }
         </div>
     </div>
+
+    <div class="imagen-lateral derecha">
+        <img src="@rutaImagen2" alt="Consejo de mantenimiento">
+    </div>
 </body>
 <style>
     body {
         background-color: #1c2c2c;
         color: #00cfff;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        min-height: 100vh;
     }
+
+    .imagen-lateral {
+        position:absolute;
+        top: 0;
+        height: 100vh;
+        width: 250px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: -1;
+        margin-left:1%;
+        margin-right:1%;
+
+            }
+
+        .imagen-lateral img {
+            max-height: 100%;
+            max-width: 100%;
+            
+        }
+
+    .izquierda {
+        left: 0;
+    }
+
+    .derecha {
+        right: 0;
+    }
+
+    .vehiculos-container {
+        padding: 20px;
+        max-width: 950px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        background-color: rgba(28, 44, 44, 0.9); 
+    }
+
     h2 {
         color: #00cfff;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
-    }
-    .vehiculos-container {
-        padding: 20px;
-        max-width: 1000px;
-        margin: auto;
     }
 
     .top-bar {
@@ -63,6 +153,7 @@
         margin-bottom: 10px;
         border-radius: 5px;
     }
+
         .boton-add:hover {
             font-weight: bold;
         }

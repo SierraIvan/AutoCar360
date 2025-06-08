@@ -3,6 +3,28 @@
 @{
     ViewBag.Title = "Próximos Mantenimientos";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Random rnd = new Random();
+    int numero1 = rnd.Next(1, 5);
+    int numero2;
+    do
+    {
+        numero2 = rnd.Next(1, 5);
+    } while (numero2 == numero1);
+
+    string ObtenerRutaImagen(int num)
+    {
+        switch (num)
+        {
+            case 1: return Url.Content("~/Imagenes/bateria.jpg");
+            case 2: return Url.Content("~/Imagenes/ruedas.jpg");
+            case 3: return Url.Content("~/Imagenes/revision_ITV.jpg");
+            case 4: return Url.Content("~/Imagenes/aceites_de_motor.jpg");
+            default: return Url.Content("~/Imagenes/Logo360.png");
+        }
+    }
+
+    string rutaImagen1 = ObtenerRutaImagen(numero1);
+    string rutaImagen2 = ObtenerRutaImagen(numero2);
 }
 
 <style>
@@ -13,6 +35,40 @@
     }
     .cards{
         width:100%;
+    }
+    .imagen-lateral {
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        width: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: -1;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+        .imagen-lateral img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+
+    .izquierda {
+        left: 0;
+    }
+
+    .derecha {
+        right: 0;
+    }
+
+    .vehiculos-container {
+        padding: 20px;
+        max-width: 950px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        background-color: rgba(28, 44, 44, 0.9);
     }
 
     .card {
@@ -50,29 +106,39 @@
 <body>
 
     <h2 class="text-center mt-4">PRÓXIMOS MANTENIMIENTOS</h2>
-    <div class="containter-boton">
-        <div class="d-flex justify-content-between my-4">
-            <a href="@Url.Action("Index", "HISTORIALMANTENIMIENTO")" class="boton">Mostrar historial de mantenimientos</a>
-            <a href="@Url.Action("Create", "MANTENIMIENTOVEHICULO")" class="boton">Realizar mantenimiento</a>
-        </div>
+    <div class="imagen-lateral izquierda">
+        <img src="@rutaImagen1" alt="Consejo de mantenimiento">
     </div>
-    <div class="cards">
-        @foreach (var item in Model)
-        {
-            <div class="card">
-                <div class="mb-2">
-                    <strong>Matrícula:</strong><p class="parrafo"> @item.MANTENIMIENTOVEHICULO.VEHICULOS.Vehiculo_Matricula </p>
-                </div>
-                <div class="mb-2">
-                    <strong>Tipo de cambio:</strong> <p class="parrafo">@item.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO.Mantenimiento_Nombre </p>
-                </div>
-                <div class="mb-3">
-                    <strong>Km a los que hacer el cambio:</strong> <p class="parrafo"> @item.ProximoMantenimiento_Km</p>
-                </div>
-                <div class="text-end">
-                    @Html.ActionLink("Eliminar este próximo mantenimiento", "Delete", new { id = item.Id_ProximoMantenimiento }, new { @class = "boton" })
-                </div>
+    <div class="vehiculos-container">
+        <div class="containter-boton">
+            <div class="d-flex justify-content-between my-4">
+                <a href="@Url.Action("Index", "HISTORIALMANTENIMIENTO")" class="boton">Mostrar historial de mantenimientos</a>
+                <a href="@Url.Action("Create", "MANTENIMIENTOVEHICULO")" class="boton">Realizar mantenimiento</a>
             </div>
-        }
+        </div>
+        <div class="cards">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="mb-2">
+                        <strong>Matrícula:</strong><p class="parrafo"> @item.MANTENIMIENTOVEHICULO.VEHICULOS.Vehiculo_Matricula </p>
+                    </div>
+                    <div class="mb-2">
+                        <strong>Tipo de cambio:</strong> <p class="parrafo">@item.MANTENIMIENTOVEHICULO.TIPOMANTENIMIENTO.Mantenimiento_Nombre </p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Km a los que hacer el cambio:</strong> <p class="parrafo"> @item.ProximoMantenimiento_Km</p>
+                    </div>
+                    <div class="text-end">
+                        @Html.ActionLink("Eliminar este próximo mantenimiento", "Delete", new { id = item.Id_ProximoMantenimiento }, new { @class = "boton" })
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+    <div class="imagen-lateral derecha">
+        <img src="@rutaImagen2" alt="Consejo de mantenimiento">
     </div>
 </body>

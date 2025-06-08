@@ -3,6 +3,28 @@
 @{
     ViewBag.Title = "Próximas Revisiones";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Random rnd = new Random();
+    int numero1 = rnd.Next(1, 5);
+    int numero2;
+    do
+    {
+        numero2 = rnd.Next(1, 5);
+    } while (numero2 == numero1);
+
+    string ObtenerRutaImagen(int num)
+    {
+        switch (num)
+        {
+            case 1: return Url.Content("~/Imagenes/bateria.jpg");
+            case 2: return Url.Content("~/Imagenes/ruedas.jpg");
+            case 3: return Url.Content("~/Imagenes/revision_ITV.jpg");
+            case 4: return Url.Content("~/Imagenes/aceites_de_motor.jpg");
+            default: return Url.Content("~/Imagenes/Logo360.png");
+        }
+    }
+
+    string rutaImagen1 = ObtenerRutaImagen(numero1);
+    string rutaImagen2 = ObtenerRutaImagen(numero2);
 }
 
 <style>

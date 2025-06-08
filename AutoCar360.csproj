@@ -251,6 +251,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagenes\bateria.jpg" />
+    <Content Include="Imagenes\Camion.png" />
+    <Content Include="Imagenes\Coche.png" />
+    <Content Include="Imagenes\Furgoneta.png" />
+    <Content Include="Imagenes\Moto.png" />
+    <Content Include="Imagenes\revision_ITV.jpg" />
+    <Content Include="Imagenes\ruedas.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -264,6 +271,7 @@
     <Content Include="Controllers\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Imagenes\aceites_de_motor.jpg" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

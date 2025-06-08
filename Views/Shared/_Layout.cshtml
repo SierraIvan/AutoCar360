@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("VEHICULOS", "Index", "VEHICULOS", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("USUARIOS", "Index", "USUARIOS", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("CAMBIO USUARIO", "Index", "USUARIOS", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("MANTENIMIENTOS", "Index", "PROXIMOMANTENIMIENTO", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("REVISIONES", "Index", "PROXIMASREVISIONES", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
@@ -30,11 +30,11 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer class="custom-footer">
+        
+        <footer class="custom-footer" style="margin-top:100px">
+            <hr />
             <div class="container">
                 <div class="row">
-                    <!-- Columna 1: Contacto -->
                     <div class="col-md-4 footer-column">
                         <h4>Contacto</h4>
                         <ul>
@@ -44,7 +44,6 @@
                         </ul>
                     </div>
 
-                    <!-- Columna 2: Términos y Condiciones -->
                     <div class="col-md-4 footer-column">
                         <h4>Legal</h4>
                         <ul>
@@ -54,7 +53,6 @@
                         </ul>
                     </div>
 
-                  
                 </div>
                 <div class="copyright">
                     &copy; @DateTime.Now.Year - AutoCar360 | Iván Sierra Pérez
