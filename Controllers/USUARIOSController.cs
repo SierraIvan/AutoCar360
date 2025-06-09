@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AutoCar360.Models;
-using AutoCar360.Controllers;
 
 namespace AutoCar360.Controllers
 {
@@ -47,24 +46,35 @@ namespace AutoCar360.Controllers
             return RedirectToAction("Index");
         }
 
-
+        // GET: USUARIOS/Create (Registro)
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: USUARIOS/Create
+        // POST: USUARIOS/Create (Registro)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(USUARIOS usuario)
         {
             if (ModelState.IsValid)
             {
+                // Verifica si ya existe un usuario con ese nombre y contraseña
+                bool yaExiste = db.USUARIOS.Any(u =>
+                    u.Usuario_Nombre == usuario.Usuario_Nombre &&
+                    u.Usuario_Password == usuario.Usuario_Password);
+
+                if (yaExiste)
+                {
+                    ModelState.AddModelError("", "Ya existe un usuario con esa contraseña.");
+                    return View(usuario);
+                }
+
                 try
                 {
-                    // Lógica para guardar el usuario
-                    // db.USUARIOS.Add(usuario);
-                    // db.SaveChanges();
+                    usuario.Usuario_FechaRegistro = DateTime.Now;
+                    db.USUARIOS.Add(usuario);
+                    db.SaveChanges();
 
                     return RedirectToAction("Index");
                 }
@@ -76,7 +86,5 @@ namespace AutoCar360.Controllers
 
             return View(usuario);
         }
-
-
     }
 }

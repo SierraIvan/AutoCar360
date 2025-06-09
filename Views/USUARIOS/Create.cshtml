@@ -127,12 +127,19 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+
         <div class="form-container">
-            @Html.TextBoxFor(model => model.Usuario_Nombre, new { @type = "text", placeholder = "Nuevo Usuario", id = "Usuario_Nombre" })
 
-            @Html.PasswordFor(model => model.Usuario_Password, new { placeholder = "Contraseña", id = "Usuario_Password" })
+            @Html.ValidationSummary(true, "", new { @class = "validation-summary-custom" })
 
-            @Html.HiddenFor(model => model.Usuario_FechaRegistro, new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
+            @Html.TextBoxFor(m => m.Usuario_Nombre,
+                             new { @type = "text", placeholder = "Nuevo Usuario", id = "Usuario_Nombre" })
+
+            @Html.PasswordFor(m => m.Usuario_Password,
+                              new { placeholder = "Contraseña", id = "Usuario_Password" })
+
+            @Html.HiddenFor(m => m.Usuario_FechaRegistro,
+                            new { @Value = DateTime.Now.ToString("yyyy-MM-dd") })
 
             <div class="button-container">
                 <input type="submit" value="Registrarse" class="button" />

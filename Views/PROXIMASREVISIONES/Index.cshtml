@@ -45,13 +45,13 @@
         padding: 8px;
         margin-bottom: 10px;
         border-radius: 5px;
-        width: 65%;
+        width: 95%;
         margin-left: auto;
         margin-right: auto;
     }
 
     .containter-boton {
-        width: 65%;
+        width: 95%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -69,38 +69,82 @@
         display: contents;
         font-style: italic;
     }
+    .imagen-lateral {
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        width: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: -1;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+        .imagen-lateral img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+
+    .izquierda {
+        left: 0;
+    }
+
+    .derecha {
+        right: 0;
+    }
+
+    .vehiculos-container {
+        padding: 20px;
+        width: 70%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        background-color: rgba(28, 44, 44, 0.9);
+    }
+
 </style>
 
 <body>
 
     <h2 class="text-center mt-4">PRÓXIMAS REVISIONES</h2>
-    <div class="containter-boton">
-        <div class="d-flex justify-content-between my-4">
-            <a href="@Url.Action("Index", "HISTORIALREVISIONES")" class="boton">Mostrar historial de revisiones</a>
-            <a href="@Url.Action("Create", "REVISIONESVEHICULOes")" class="boton">Realizar revision</a>
+    <div class="imagen-lateral izquierda">
+        <img src="@rutaImagen1" alt="Consejo de mantenimiento">
+    </div>
+    <div class="vehiculos-container">
+        <div class="containter-boton">
+            <div class="d-flex justify-content-between my-4">
+                <a href="@Url.Action("Index", "HISTORIALREVISIONES")" class="boton">Mostrar historial de revisiones</a>
+                <a href="@Url.Action("Create", "REVISIONESVEHICULOes")" class="boton">Realizar revision</a>
+            </div>
+        </div>
+        <div class="cards">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="mb-2">
+                        <strong>Matrícula:</strong><p class="parrafo"> @item.REVISIONESVEHICULO.VEHICULOS.Vehiculo_Matricula </p>
+                    </div>
+                    <div class="mb-2">
+                        <strong>Revisión por:</strong> <p class="parrafo">@item.REVISIONESVEHICULO.TIPOREVISIONES.Revision_Nombre </p>
+                    </div>
+                    <div class="mb-2">
+
+                        <strong>Cuando hacer el cambio:</strong> <p class="parrafo">@(( (DateTime)item.ProximaRevision_intervaloTiempo).ToString("yyyy-MM-dd"))</p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Km a los que hacer el cambio:</strong> <p class="parrafo"> @item.ProximaRevision_intervaloKm</p>
+                    </div>
+                    <div class="text-end">
+                        @Html.ActionLink("Eliminar esta próxima revisión", "Delete", new { id = item.Id_ProximaRevision }, new { @class = "boton" })
+                    </div>
+                </div>
+            }
         </div>
     </div>
-    <div class="cards">
-        @foreach (var item in Model)
-        {
-            <div class="card">
-                <div class="mb-2">
-                    <strong>Matrícula:</strong><p class="parrafo"> @item.REVISIONESVEHICULO.VEHICULOS.Vehiculo_Matricula </p>
-                </div>
-                <div class="mb-2">
-                    <strong>Revisión por:</strong> <p class="parrafo">@item.REVISIONESVEHICULO.TIPOREVISIONES.Revision_Nombre </p>
-                </div>
-                <div class="mb-2">
-                    
-                    <strong>Cuando hacer el cambio:</strong> <p class="parrafo">@(( (DateTime)item.ProximaRevision_intervaloTiempo).ToString("yyyy-MM-dd"))</p>
-                </div>
-                <div class="mb-3">
-                    <strong>Km a los que hacer el cambio:</strong> <p class="parrafo"> @item.ProximaRevision_intervaloKm</p>
-                </div>
-                <div class="text-end">
-                    @Html.ActionLink("Eliminar esta proxima revisión", "Delete", new { id = item.Id_ProximaRevision }, new { @class = "boton" })
-                </div>
-            </div>
-        }
+
+    <div class="imagen-lateral derecha">
+        <img src="@rutaImagen2" alt="Consejo de mantenimiento">
     </div>
 </body>
